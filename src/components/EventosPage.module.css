@@ -1,5 +1,6 @@
 .layout{
-    width: 100%;
+    margin-top: 8rem;
+    width: 90% auto;
     background-color: rgba(97, 91, 91, 0.479);
     border-radius: 5px;
     padding: 10px;

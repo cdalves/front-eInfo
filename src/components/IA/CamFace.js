@@ -2,10 +2,10 @@ import * as faceapi from 'face-api.js';
 import React from 'react';
 import style from "./CamFace.module.css"
 
-function CamFace() {
 
-  const [modelsLoaded, setModelsLoaded] = React.useState(false);
-  const [captureVideo, setCaptureVideo] = React.useState(false);
+function CamFace() {
+  const [resultados, setResultados] = React.useState(false);
+
 
   const videoRef = React.useRef();
   const videoHeight = 480;
@@ -14,32 +14,31 @@ function CamFace() {
 
   React.useEffect(() => {
     const loadModels = async () => {
-      const MODEL_URL = process.env.PUBLIC_URL + '/models';
-      
+    const MODEL_URL = process.env.PUBLIC_URL + '/models';
+    
 
-      Promise.all([
+     await Promise.all([
         faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
         faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
         faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
         faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
-      ]).then(setModelsLoaded(true));
+      ]);
     }
+    startVideo();
     loadModels();
   }, []);
 
-  console.log(faceapi.nets)
-
-  const startVideo = () => {
-    setCaptureVideo(true);
-    navigator.mediaDevices
+  async function startVideo(){
+    await navigator.mediaDevices
       .getUserMedia({ video: { width: 300 } })
       .then(stream => {
-        let video = videoRef.current;
-        video.srcObject = stream;
+        let video =  videoRef.current;
+        video.srcObject =  stream;
         video.play();
       })
       .catch(err => {
         console.error("error:", err);
+        closeWebcam();
       });
   }
 
@@ -57,51 +56,30 @@ function CamFace() {
         const detections = await faceapi.detectAllFaces(videoRef.current, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions();
 
         const resizedDetections = faceapi.resizeResults(detections, displaySize);
-
-        canvasRef && canvasRef.current && canvasRef.current.getContext('2d').clearRect(0, 0, videoWidth, videoHeight);
-        canvasRef && canvasRef.current && faceapi.draw.drawDetections(canvasRef.current, resizedDetections);
-        canvasRef && canvasRef.current && faceapi.draw.drawFaceLandmarks(canvasRef.current, resizedDetections);
-        canvasRef && canvasRef.current && faceapi.draw.drawFaceExpressions(canvasRef.current, resizedDetections);
+        setResultados(resizedDetections);
+          await canvasRef.current.getContext('2d').clearRect(0, 0, videoWidth, videoHeight);
+          await faceapi.draw.drawDetections(canvasRef.current, resizedDetections);
+          await faceapi.draw.drawFaceLandmarks(canvasRef.current, resizedDetections);
+          await faceapi.draw.drawFaceExpressions(canvasRef.current, resizedDetections);
       }
-    }, 100)
+    }, 1000)
   }
-
+console.log(resultados);
   const closeWebcam = () => {
     videoRef.current.pause();
     videoRef.current.srcObject.getTracks()[0].stop();
-    setCaptureVideo(false);
   }
 
   return (
     <div>
       <div className={style.container}>
-        {
-          captureVideo && modelsLoaded ?
-            <button onClick={closeWebcam} style={{ cursor: 'pointer', backgroundColor: 'green', color: 'white', padding: '15px', fontSize: '25px', border: 'none', borderRadius: '10px' }}>
-              Close Webcam
-            </button>
-            :
-            <button onClick={startVideo} style={{ cursor: 'pointer', backgroundColor: 'green', color: 'white', padding: '15px', fontSize: '25px', border: 'none', borderRadius: '10px' }}>
-              Open Webcam
-            </button>
-        }
-      </div>
-      {
-        captureVideo ?
-          modelsLoaded ?
-            <div>
-              <div style={{ display: 'flex', justifyContent: 'center', padding: '10px' }}>
-                <video ref={videoRef} height={videoHeight} width={videoWidth} onPlay={handleVideoOnPlay} style={{ borderRadius: '10px' }} />
-                <canvas ref={canvasRef} style={{ position: 'absolute' }} />
-              </div>
-            </div>
-            :
-            <div>loading...</div>
-          :
-          <>
-          </>
-      }
-    </div>
+              <div >
+                <video ref={videoRef} height={videoHeight} width={videoWidth} onPlay={handleVideoOnPlay}/>
+                <canvas ref={canvasRef} style={{ position: 'absolute', left: '0' }} />
+              </div>         
+      </div>   
+
+  </div>
   );
 }
 

@@ -1,3 +1,8 @@
 .container{
     margin-top: 8rem;
 }
+
+.video canvas{
+    position: absolute;
+    left: 0;
+}

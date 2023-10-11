@@ -4,7 +4,6 @@ import Button from '../Forms/Button';
 import Input from '../Forms/Input';
 import useForm from '../../Hooks/useForm';
 import IconLogin  from '../../Assets/iconLogin.png';
-import axios from "axios";
 import { Create_User } from '../../Api';
 
 const Sigin = () => {
@@ -36,8 +35,8 @@ const Sigin = () => {
 
   return (
     <section className={style.areaLogin}>
-      <div className={style.login}>
-      <img className={style.icon} src={IconLogin}/>      
+      <div className={style.login}>  
+      <IconLogin className={style.icon}/>   
        <form action="" onSubmit={handleSubmit}>
           <Input name="name" label="Nome" type="text"{...username}/>
           <Input name="email" label="E-mail" type="email" {...email}/>          
