@@ -1,0 +1,21 @@
+.layout{
+    width: 100%;
+    background-color: rgba(97, 91, 91, 0.479);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.imgEventos{
+    width: 100%;
+    border-radius: 5px;
+
+}
+
+.info{
+    color: white; 
+    margin: 1rem 0;  
+
+}
+
+
+

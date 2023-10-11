@@ -1,0 +1,55 @@
+.layoutHome{
+  width: 1520px;
+  display: grid;
+  grid-template-areas: 
+  "principal principal principal secundario"
+  "principal principal principal secundario"
+  "principal principal principal secundario"
+  "principal principal principal secundario";
+
+  grid-gap: 20px;
+}
+
+
+.principal{
+  width: 1100px;
+  grid-area: "principal";
+  grid-row: principal;
+  grid-column: principal;
+
+    
+}
+
+.secundario{
+  width: 380px;
+  grid-area: "secundario";
+  margin: -1px;
+}
+
+
+
+
+@media (max-width: 1550px) {
+  .layoutHome{
+  width: 90%;
+  display: block;
+  grid-template-areas:none;
+  justify-content: center;
+  
+}
+
+
+.principal{
+  width: 100%;
+  grid-area: none;
+  margin-top: 20px;
+}
+
+.secundario{
+  width: 100%; 
+  grid-area: none;
+  margin-top: 20px;
+
+}
+}
+
