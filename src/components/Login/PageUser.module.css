@@ -1,0 +1,26 @@
+.layout{
+    width: 80%;
+    margin: 80% auto;
+    margin-top: 8rem;
+   
+}
+
+.grid{
+    display: grid;
+    grid-template-areas: "userArea userArea userEventos userEventos userEventos ";
+}
+
+.userArea{
+    border: 5px solid rgb(255, 255, 255);
+    grid-area: "userArea";
+    grid-column: userArea;
+    grid-row: userArea;
+}
+
+.userEventos{
+    height: 600px;
+    grid-area: "userEventos";
+    grid-column: userEventos;
+    grid-row: userEventos;
+    padding: 1rem;
+}

@@ -8,7 +8,7 @@ const Eventos = () => {
   const params = useParams();
   const [evento, setEvento] = useState();
 
-   
+   console.log(params);
 
   useEffect(() => {
     geteventos();     

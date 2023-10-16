@@ -35,8 +35,7 @@ const Sigin = () => {
 
   return (
     <section className={style.areaLogin}>
-      <div className={style.login}>  
-      <IconLogin className={style.icon}/>   
+      <div className={style.sigin}>  
        <form action="" onSubmit={handleSubmit}>
           <Input name="name" label="Nome" type="text"{...username}/>
           <Input name="email" label="E-mail" type="email" {...email}/>          

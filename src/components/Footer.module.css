@@ -3,6 +3,7 @@
     height: 200px;
     background-color: #000000;
     border-top: 3px solid  rgb(97, 95, 95);
+    clear: both;
 }
 
 .containerFooter{

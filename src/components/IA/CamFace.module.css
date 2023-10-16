@@ -2,7 +2,21 @@
     margin-top: 8rem;
 }
 
-.video canvas{
-    position: absolute;
-    left: 0;
+.grid{
+    display: grid;
+    grid-template-areas: "video grafico";
+}
+
+.video{
+    min-width: 640px;
+    grid-area: "video";
+    grid-column: video;
+    grid-row: video;
+}
+
+.grafico{
+    border: 1px solid green;
+    grid-area: "grafico";
+    grid-column: grafico;
+    grid-row: grafico;
 }

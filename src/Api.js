@@ -12,6 +12,19 @@ export function GET_EVENTO(id) {
   };
 }
 
+export function USER_EVENTOS(token) {
+  return {
+    url: apiURL + '/meuseventos',
+    options: {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'Application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    },
+  };
+}
+
 export function Create_User(body) {
     return {
       url: apiURL + '/usuario',

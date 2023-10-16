@@ -5,6 +5,7 @@ import Input from '../Forms/Input';
 import useForm from '../../Hooks/useForm';
 import IconLogin  from '../../Assets/iconLogin.png';
 import { UserContext } from '../../UserContext';
+import { Navigate } from 'react-router-dom';
 
 
 const Login = () => {
@@ -12,7 +13,7 @@ const Login = () => {
   const password = useForm();
   const [error, seterror] = React.useState(null)
 
-  const { userLogin } = React.useContext(UserContext);
+  const { userLogin, testToken } = React.useContext(UserContext);
 
   async function handleSubmit(event){
     event.preventDefault();
@@ -20,6 +21,9 @@ const Login = () => {
         userLogin(email.value, password.value);
       }
   }
+
+
+  if(testToken) return <Navigate to ="/conta"/> 
 
   return (
     <section className={style.areaLogin}>
