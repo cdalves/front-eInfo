@@ -35,7 +35,6 @@ const Eventos = () => {
             <Button>Não</Button>
             <Button>Talvez</Button>
             <Button>Sim</Button>
-            <Link to="/face">Reconhecimento facial</Link>
             
           </div>        
       </div>
