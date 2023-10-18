@@ -6,6 +6,7 @@ import useForm from '../../Hooks/useForm';
 import IconLogin  from '../../Assets/iconLogin.png';
 import { UserContext } from '../../UserContext';
 import { Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom/dist';
 
 
 const Login = () => {
@@ -32,8 +33,10 @@ const Login = () => {
         <form action="" onSubmit={handleSubmit}>
           <Input name="email" label="Email" type="email" {...email}/>
           <Input name="password" label="Senha" type="password" {...password}/>
+          
           {error && <p className={style.error}>{error}</p>}
           <Button>Entrar</Button>
+          <Link to="/cadastro" className={style.cadastro}>Cadatrar-se</Link>
         </form>
       </div>
     </section>

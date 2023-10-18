@@ -11,16 +11,54 @@
 }
 
 .userArea{
-    border: 5px solid rgb(255, 255, 255);
+    max-width: 400px;
+    min-width: 300px;
+    height: 500px;
+    background-color: rgba(117, 116, 116, 0.356);
+    border-radius: 10px;
     grid-area: "userArea";
     grid-column: userArea;
     grid-row: userArea;
 }
 
 .userEventos{
-    height: 600px;
     grid-area: "userEventos";
     grid-column: userEventos;
     grid-row: userEventos;
     padding: 1rem;
+}
+
+
+.icon{
+    margin: 20px;
+}
+
+.dadosUser{
+    position: relative;
+    top: -80px;
+    left: 120px;
+
+}
+
+.opcoes li{
+    display: flex;
+    align-items: center;
+}
+
+.btncriar{
+    font-size: 1.5rem;
+    font-style: bold;
+    padding: 10px;
+    border-radius: 5px;
+    color: aliceblue;
+    background-color: rgb(17, 164, 66);
+    position: relative;
+    bottom: -200px;
+    left: auto;
+
+}
+
+.btncriar:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }

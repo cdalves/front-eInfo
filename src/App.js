@@ -8,6 +8,7 @@ import Login from './components/Login/Login';
 import { UserStorage } from './UserContext';
 import EventosPage from './components/EventosPage';
 import PageUser from './components/Login/PageUser';
+import CreatEventos from './components/CreatEventos';
 
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
                 <Route path='/entrar/*' element={<Login/>}/>
                 <Route path='/conta/' element={<PageUser/>}/>
                 <Route path='/conta/evento/:id' element={<EventosPage/>}/>
-                <Route path='/grafico' element={<Exprecao/>}/>
+                <Route path='/criar-evento' element={<CreatEventos/>}/>
+
 
             </Routes>
             <Footer/>

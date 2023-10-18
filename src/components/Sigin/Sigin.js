@@ -24,18 +24,17 @@ const Sigin = () => {
             password: password.value,
           });      
           const response = await fetch(url, options);
-          const json = await response.json();
-          console.log(json.data.token);      
+          const json = await response.json();      
         }catch(error) { 
           seterror(error.message);
-          console.log(error.message);
         }  
       }
   }
 
   return (
     <section className={style.areaLogin}>
-      <div className={style.sigin}>  
+      <div className={style.sigin}> 
+      <img className={style.icon} src={IconLogin}/>   
        <form action="" onSubmit={handleSubmit}>
           <Input name="name" label="Nome" type="text"{...username}/>
           <Input name="email" label="E-mail" type="email" {...email}/>          

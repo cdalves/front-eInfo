@@ -1,12 +1,26 @@
 export const apiURL = "http://127.0.0.1:8000/api";
 
+export function CREAT_EVENTOS(formData, token) {
+  return {
+    url: apiURL + '/evento',
+    options: {
+      method: 'POST',
+      headers: {
+        'Accept': 'Application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: formData,
+    },
+  };
+}
+
 export function GET_EVENTO(id) {
   return {
     url: apiURL + '/evento/' + id,
     options: {
       method: 'GET',
       headers: {
-        'Content-Type': 'Application/json', 
+        'Accept': 'Application/json', 
       },
     },
   };
@@ -18,7 +32,7 @@ export function USER_EVENTOS(token) {
     options: {
       method: 'GET',
       headers: {
-        'Content-Type': 'Application/json',
+        'Accept': 'Application/json',
         Authorization: 'Bearer ' + token,
       },
     },
@@ -31,7 +45,7 @@ export function Create_User(body) {
       options: {
         method: 'POST',
         headers: {
-          'Content-Type': 'Application/json', 
+          'Accept': 'Application/json', 
         },
         body: JSON.stringify(body),
       },
@@ -60,6 +74,7 @@ export function Get_User(token) {
       options: {
         method: 'POST',
         headers: {
+          'Accept': 'Application/json',
           Authorization: 'Bearer ' + token,
         },
       },

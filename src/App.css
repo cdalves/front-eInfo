@@ -4,10 +4,9 @@
   
   body {
     margin: 0px;
-    /* background-image: url(./Imagens/fundo.jpg); */
     background-position: center left;
     background-attachment: fixed;
-    background-color: #888;
+    background-color: #c9c9c9;
     scrollbar-color: #888 #00000000;
     --type-first: Helvetica, Arial, sans-serif;
     --type-second: 'Spectral', Georgia;
@@ -41,7 +40,8 @@
   
   .container {
     width: 80%;
-    margin: 8rem auto;
+    margin: 0 auto;
+    margin-top: 8rem;
   }
 
   ::-webkit-scrollbar {

@@ -3,13 +3,16 @@ import Login from './Login'
 import style from './PageUser.module.css'
 import Eventos from '../Eventos';
 import { USER_EVENTOS } from '../../Api';
-import { useParams } from 'react-router-dom';
+import iconUser from '../../Assets/usuário-90.png'
+import { UserContext } from '../../UserContext';
+import { Link } from 'react-router-dom';
 
 const PageUser = () => {
   const [eventos, setEventos] = React.useState([]);
-  
-  
 
+  const { data } = React.useContext(UserContext);
+  
+  
   React.useEffect(() => {
     geteventos();
      
@@ -22,19 +25,37 @@ const PageUser = () => {
        const response = await fetch(url, options);   
        const data = await response.json();
        setEventos(data);
-       console.log(data);
 
      }catch(erro){
        console.log(erro);
      }
    }
 
-
   return (
     <div className={style.layout}>
       <div className={style.grid}>
           <div className={style.userArea}>
-              usuario
+          <img className={style.icon} src={iconUser}/> 
+          <div className={style.dadosUser}>
+            {data ? (
+                  <>
+                  <h3>{data.name}</h3>
+                  <span>{data.email}</span></>)
+                      : (<h3>Carregando...</h3>)}
+            <ul className={style.opcoes}>
+              <li>
+                <Link>Inscrições</Link>
+              </li>
+              <li>
+                <Link></Link>
+              </li>
+              <li>
+                <Link to='/criar-evento' className={style.btncriar}>Criar evento</Link>
+              </li>
+            </ul>
+          </div> 
+          
+             
           </div>
           <div className={style.userEventos}>
             <h1>Meus eventos</h1>
