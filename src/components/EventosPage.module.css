@@ -1,9 +1,8 @@
 .layout{
-    margin-top: 8rem;
-    width: 90% auto;
-    background-color: rgba(97, 91, 91, 0.479);
+    background-color: rgba(117, 116, 116, 0.356);
     border-radius: 5px;
     padding: 10px;
+    margin-bottom: 20px;
 }
 
 .imgEventos{
@@ -13,10 +12,14 @@
 }
 
 .info{
-    color: white; 
-    margin: 1rem 0;  
+    display: grid;
+    color: rgb(0, 0, 0); 
+    margin: 1rem ;
+    gap: 10px;
+
 
 }
 
-
-
+.h3{
+    list-style: disc;
+}

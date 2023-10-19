@@ -6,6 +6,8 @@ import { USER_EVENTOS } from '../../Api';
 import iconUser from '../../Assets/usuário-90.png'
 import { UserContext } from '../../UserContext';
 import { Link } from 'react-router-dom';
+import { FaUserPen } from "react-icons/fa6";
+
 
 const PageUser = () => {
   const [eventos, setEventos] = React.useState([]);
@@ -40,7 +42,8 @@ const PageUser = () => {
             {data ? (
                   <>
                   <h3>{data.name}</h3>
-                  <span>{data.email}</span></>)
+                  <span>{data.email}</span>
+                  <Link>{FaUserPen}</Link></>)
                       : (<h3>Carregando...</h3>)}
             <ul className={style.opcoes}>
               <li>

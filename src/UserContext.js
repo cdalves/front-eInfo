@@ -27,7 +27,6 @@ export const UserStorage = ({ children }) => {
       const json = await tokenRes.json();
       window.localStorage.setItem('token',json.data.token );
       setTestToken(tokenRes.ok)
-      console.log(testToken)
       getUser(json.data.token);
     }catch(erro){
       console.log(erro);
