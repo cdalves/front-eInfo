@@ -1,7 +1,8 @@
 .areaLogin{
-    width: 50%;
+    width: 600px;
     margin: 8rem auto;
-    background-color: rgba(97, 91, 91, 0.479);
+    background-color: rgba(117, 116, 116, 0.356);
+
     padding: 1rem;
     border-radius: 20px;
     margin-bottom: 500px;
@@ -24,10 +25,10 @@
     display: block;
     margin: 20px;
     font-size: 1.5rem;
-    color: aliceblue;
+    color: rgb(26, 48, 75);
 }
 
 .cadastro:hover{
-    color: rgb(26, 48, 75);
+    color: rgb(255, 255, 255);
 
 }

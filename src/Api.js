@@ -66,7 +66,6 @@ export function GET_TOKEN(body){
         };
       
 }
-
  
 export function Get_User(token) {
     return {
@@ -80,6 +79,33 @@ export function Get_User(token) {
       },
     };
   }
+
+  export function USER_INSCRICOES(token) {
+    return {
+      url: apiURL + '/inscricao',
+      options: {
+        method: 'GET',
+        headers: {
+          'Accept': 'Application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      },
+    };
+  }
+
+  export function USER_LOGOUT(token) {
+    return {
+      url: apiURL + '/logout',
+      options: {
+        method: 'POST',
+        headers: {
+          'Accept': 'Application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      },
+    };
+  }
+
 
 export const eventos = [
     {

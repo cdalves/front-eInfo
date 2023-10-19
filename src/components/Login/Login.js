@@ -15,6 +15,8 @@ const Login = () => {
   const [error, seterror] = React.useState(null)
 
   const { userLogin, testToken } = React.useContext(UserContext);
+  const token = window.localStorage.getItem("token");
+
 
   async function handleSubmit(event){
     event.preventDefault();
@@ -24,7 +26,7 @@ const Login = () => {
   }
 
 
-  if(testToken) return <Navigate to ="/conta"/> 
+  if(testToken && token ) return <Navigate to ="/conta"/> 
 
   return (
     <section className={style.areaLogin}>
