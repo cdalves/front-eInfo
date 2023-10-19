@@ -1,6 +1,6 @@
 .layout{
     width: 100%;
-    background-color: rgba(37, 37, 37, 0.884);
+    background-color: rgba(117, 116, 116, 0.356);
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 20px;
@@ -13,8 +13,8 @@
 }
 
 .info{
-    color: white; 
-    margin: 1rem 0;  
+    color: rgb(0, 0, 0); 
+    margin: 1rem ;  
 
 }
 

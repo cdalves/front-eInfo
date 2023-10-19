@@ -1,5 +1,6 @@
 import React from 'react';
 import { GET_TOKEN, Get_User, } from './Api';
+import { Navigate } from 'react-router-dom';
 
 export const UserContext = React.createContext();
 
@@ -8,6 +9,8 @@ export const UserStorage = ({ children }) => {
   const [login, setLogin] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
+  const [testToken, setTestToken] = React.useState(null);
+
 
   async function getUser(token) {
     const { url, options } = Get_User(token);
@@ -18,16 +21,21 @@ export const UserStorage = ({ children }) => {
   }
 
   async function userLogin(email, password) {
-    const { url, options } = GET_TOKEN({ email, password });
-    const tokenRes = await fetch(url, options);
-    const json = await tokenRes.json();
-    //window.localStorage.setItem('token', token);
-    console.log(json);
-    getUser(json.data.token);
+    try{
+      const { url, options } = GET_TOKEN({ email, password });
+      const tokenRes = await fetch(url, options);
+      const json = await tokenRes.json();
+      window.localStorage.setItem('token',json.data.token );
+      setTestToken(tokenRes.ok)
+      getUser(json.data.token);
+    }catch(erro){
+      console.log(erro);
+    }
   }
 
+
   return (
-    <UserContext.Provider value={{ userLogin, data }}>
+    <UserContext.Provider value={{ userLogin, data, testToken }}>
       {children}
     </UserContext.Provider>
   );

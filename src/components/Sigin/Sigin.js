@@ -4,7 +4,6 @@ import Button from '../Forms/Button';
 import Input from '../Forms/Input';
 import useForm from '../../Hooks/useForm';
 import IconLogin  from '../../Assets/iconLogin.png';
-import axios from "axios";
 import { Create_User } from '../../Api';
 
 const Sigin = () => {
@@ -25,19 +24,17 @@ const Sigin = () => {
             password: password.value,
           });      
           const response = await fetch(url, options);
-          const json = await response.json();
-          console.log(json.data.token);      
+          const json = await response.json();      
         }catch(error) { 
           seterror(error.message);
-          console.log(error.message);
         }  
       }
   }
 
   return (
     <section className={style.areaLogin}>
-      <div className={style.login}>
-      <img className={style.icon} src={IconLogin}/>      
+      <div className={style.sigin}> 
+      <img className={style.icon} src={IconLogin}/>   
        <form action="" onSubmit={handleSubmit}>
           <Input name="name" label="Nome" type="text"{...username}/>
           <Input name="email" label="E-mail" type="email" {...email}/>          

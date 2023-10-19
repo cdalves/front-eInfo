@@ -7,7 +7,8 @@ import Sigin from './components/Sigin/Sigin';
 import Login from './components/Login/Login';
 import { UserStorage } from './UserContext';
 import EventosPage from './components/EventosPage';
-import CamFace from './components/IA/CamFace';
+import PageUser from './components/Login/PageUser';
+import CreatEventos from './components/CreatEventos';
 
 
 function App() {
@@ -21,7 +22,10 @@ function App() {
                 <Route path='/evento/:id' element={<EventosPage/>}/>
                 <Route path='/cadastro' element={<Sigin/>}/>
                 <Route path='/entrar/*' element={<Login/>}/>
-                <Route path='/face' element={<CamFace/>}/>
+                <Route path='/conta/' element={<PageUser/>}/>
+                <Route path='/conta/evento/:id' element={<EventosPage/>}/>
+                <Route path='/criar-evento' element={<CreatEventos/>}/>
+
 
             </Routes>
             <Footer/>

@@ -19,3 +19,15 @@
 .icon{
     width: 20%;
 }
+
+.cadastro{
+    display: block;
+    margin: 20px;
+    font-size: 1.5rem;
+    color: aliceblue;
+}
+
+.cadastro:hover{
+    color: rgb(26, 48, 75);
+
+}
