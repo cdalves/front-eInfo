@@ -4,14 +4,14 @@ import Eventos from '../Eventos';
 import { USER_EVENTOS, USER_INSCRICOES, USER_LOGOUT } from '../../Api';
 import iconUser from '../../Assets/usuário-90.png'
 import { UserContext } from '../../UserContext';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 
 
 const PageUser = () => {
   const [eventos, setEventos] = React.useState([]);
-  const [show, setShow] = React.useState();
+  const [showInscricoes, setShowInscrcoes] = React.useState(false);
 
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const PageUser = () => {
   
   React.useEffect(() => {
     geteventos();
-     
+    
    }, []);
  
    async function geteventos(){
@@ -42,11 +42,24 @@ const PageUser = () => {
       const {url, options} = USER_INSCRICOES(token)
       const response = await fetch(url, options);   
       const data = await response.json();
-      console.log(data);
+      const ids =[];
+      data.map(item => (
+          ids.push(item.evento_id)
+      ));
+      setEventos(eventos.filter(evento => ids.includes(evento.id)));        
+      setShowInscrcoes(!showInscricoes);
+      setInscricoes();
       
-
     }catch(erro){
       console.log(erro);
+      setShowInscrcoes(false);
+
+    }
+  }
+
+  function setInscricoes(){
+    if(showInscricoes){
+      geteventos()
     }
   }
 
@@ -81,7 +94,7 @@ const PageUser = () => {
                   <Link className={style.btn}>Editar perfil</Link>
                 </li>
                 <li>
-                  <Link className={style.btn} onClick={getInscricoes}>Inscrições</Link>
+                  <Link className={(showInscricoes ? style.btnactive : style.btn)} onClick={getInscricoes} >Inscrições</Link>
                 </li>
                 <li>
                   <Link to='/criar-evento' className={style.btncriar}>Criar evento</Link>
@@ -93,7 +106,7 @@ const PageUser = () => {
             </div>  
           </div>
           <div className={style.userEventos}>
-            <h1>Meus eventos</h1>
+           {showInscricoes ? <h1>Minhas inscrições</h1> : <h1>Meus eventos</h1> } 
           {eventos.map(evento => (
                 <Eventos key={evento.id} id={evento.id} nome={evento.nome} imagem={evento.imagem}/>
 

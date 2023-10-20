@@ -26,6 +26,20 @@ export function GET_EVENTO(id) {
   };
 }
 
+export function DELETE_EVENTOS(id, token) {
+  return {
+    url: apiURL + '/evento',
+    options: {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'Application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(id),
+    },
+  };
+}
+
 export function USER_EVENTOS(token) {
   return {
     url: apiURL + '/meuseventos',
@@ -93,6 +107,20 @@ export function Get_User(token) {
     };
   }
 
+  export function USER_INSCREVER(formData,token) {
+    return {
+      url: apiURL + '/inscricao',
+      options: {
+        method: 'POST',
+        headers: {
+          'Accept': 'Application/json',
+          Authorization: 'Bearer ' + token,
+        },
+        body: formData,
+      },
+    };
+  }
+
   export function USER_LOGOUT(token) {
     return {
       url: apiURL + '/logout',
@@ -123,7 +151,7 @@ export const eventos = [
         id: "2",
         idUser: "1",
         name : 'palestra',
-        imagem : '',
+        imagem : 'https://www.tecmobile.com.br/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2021/01/Conheca-os-10-maiores-eventos-do-Brasil-e-aprenda-com-eles.jpg.webp',
         descricao: 'paslestra sobre tecnologia e desenvolvimento sustentavel',
         preFed: {
             naoVou: 0,
