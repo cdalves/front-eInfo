@@ -148,6 +148,19 @@ export function Get_User(token) {
     };
   }
 
+  export function RESPONSE_IA(id) {
+    return {
+      url: apiURL + '/avaliar/' + id,
+      options: {
+        method: 'GET',
+        headers: {
+          'Accept': 'Application/json', 
+        },
+      },
+    };
+  }
+  
+
 
 export const eventos = [
     {

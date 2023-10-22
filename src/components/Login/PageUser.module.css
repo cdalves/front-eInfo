@@ -21,10 +21,11 @@
     grid-row: userArea;
     position: sticky;
     top: 8rem;
+    overflow: hidden;
 }
 
 .name{
-    overflow: hidden;
+    width: 200px;
     
 }
 

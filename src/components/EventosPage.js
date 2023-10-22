@@ -69,6 +69,8 @@ const Eventos = () => {
             {token ? <Button onClick={Inscrever}>Inscrever-se</Button> : ''}
             {evento?.user_id === data?.id ? <Button onClick={deleteEvento}>Deletar evento</Button> : ''}
             <Link to = {`formulario/`}>formulario</Link>
+            <Link to = {`analisar/`}>Analizar com IA</Link>
+
           </div>        
       </div>
       

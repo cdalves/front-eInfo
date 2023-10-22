@@ -10,6 +10,7 @@ import EventosPage from './components/EventosPage';
 import PageUser from './components/Login/PageUser';
 import CreatEventos from './components/CreatEventos';
 import Formulario from './components/Forms/Formulario';
+import RespostaIA from './components/Forms/RespostaIA';
 
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
                 <Route path='/criar-evento' element={<CreatEventos/>}/>
                 <Route path='/evento/:id/formulario' element={<Formulario/>}/>
                 <Route path='/conta/evento/:id/formulario' element={<Formulario/>}/>
+                <Route path='/conta/evento/:id/analisar' element={<RespostaIA/>}/>
+
 
 
 

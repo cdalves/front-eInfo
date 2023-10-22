@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react'
 import style from './Formulario.module.css'
 import Button from './Button'
 import { SUBMIT_FORMULARIO } from '../../Api';
-import { UserContext } from '../../UserContext';
 import { useParams } from 'react-router-dom';
 
 const Formulario = () => { 
