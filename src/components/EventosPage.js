@@ -14,10 +14,10 @@ const Eventos = () => {
   const {testToken, data} = React.useContext(UserContext);
 
   useEffect(() => {
-    geteventos();     
+    Inscrições();     
    }, []);
 
-  async function geteventos(){
+  async function Inscrições(){
     try{
       const {url, options} = GET_EVENTO(params.id);
       const response = await fetch(url, options);  
@@ -33,7 +33,7 @@ const Eventos = () => {
     const formData = new FormData();
     formData.append('user_id', data.id);
     formData.append('evento_id', evento.id);
-    console.log(evento.id);
+    console.log(formData);
     if(token && testToken){try{
       const {url, options} = USER_INSCREVER(formData, token);
       const response = await fetch(url, options)
@@ -66,8 +66,9 @@ const Eventos = () => {
             <h4>{evento.data}</h4>
             <h4>{evento.horario}</h4>
 
-            {testToken ? <Button onClick={Inscrever}>Inscrever-se</Button> : ''}
-            {evento.user_id === data.id ? <Button onClick={deleteEvento}>Deletar evento</Button> : ''}
+            {token ? <Button onClick={Inscrever}>Inscrever-se</Button> : ''}
+            {evento?.user_id === data?.id ? <Button onClick={deleteEvento}>Deletar evento</Button> : ''}
+            <Link to = {`formulario/`}>formulario</Link>
           </div>        
       </div>
       

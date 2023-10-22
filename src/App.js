@@ -9,6 +9,7 @@ import { UserStorage } from './UserContext';
 import EventosPage from './components/EventosPage';
 import PageUser from './components/Login/PageUser';
 import CreatEventos from './components/CreatEventos';
+import Formulario from './components/Forms/Formulario';
 
 
 function App() {
@@ -22,9 +23,12 @@ function App() {
                 <Route path='/evento/:id' element={<EventosPage/>}/>
                 <Route path='/cadastro' element={<Sigin/>}/>
                 <Route path='/entrar/*' element={<Login/>}/>
-                <Route path='/conta/' element={<PageUser/>}/>
+                <Route path='/conta/*' element={<PageUser/>}/>
                 <Route path='/conta/evento/:id' element={<EventosPage/>}/>
                 <Route path='/criar-evento' element={<CreatEventos/>}/>
+                <Route path='/evento/:id/formulario' element={<Formulario/>}/>
+                <Route path='/conta/evento/:id/formulario' element={<Formulario/>}/>
+
 
 
             </Routes>

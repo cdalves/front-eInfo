@@ -10,6 +10,7 @@
     grid-template-areas: "userArea userArea userEventos userEventos userEventos ";
 }
 
+
 .userArea{
     width: 400px;
     height: 450px;
@@ -20,6 +21,11 @@
     grid-row: userArea;
     position: sticky;
     top: 8rem;
+}
+
+.name{
+    overflow: hidden;
+    
 }
 
 .userEventos{

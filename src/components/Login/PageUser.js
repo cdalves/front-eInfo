@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './PageUser.module.css'
 import Eventos from '../Eventos';
-import { USER_EVENTOS, USER_INSCRICOES, USER_LOGOUT } from '../../Api';
+import { GET_EVENTO, USER_EVENTOS, USER_INSCRICOES, USER_LOGOUT } from '../../Api';
 import iconUser from '../../Assets/usuário-90.png'
 import { UserContext } from '../../UserContext';
 import { Link } from 'react-router-dom';
@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 const PageUser = () => {
   const [eventos, setEventos] = React.useState([]);
+  const [allEventos, setAllEventos] = React.useState([]);
   const [showInscricoes, setShowInscrcoes] = React.useState(false);
 
   const navigate = useNavigate();
@@ -21,11 +22,23 @@ const PageUser = () => {
   
   
   React.useEffect(() => {
+    meusEventos();
     geteventos();
     
    }, []);
- 
+
    async function geteventos(){
+    try{
+      const {url, options} = GET_EVENTO("")
+      const response = await fetch(url, options);   
+      const data = await response.json();
+      setAllEventos(data);
+    }catch(erro){
+      console.log(erro);
+    }
+  }
+ 
+   async function meusEventos(){
      try{
        const {url, options} = USER_EVENTOS(token)
        const response = await fetch(url, options);   
@@ -46,9 +59,10 @@ const PageUser = () => {
       data.map(item => (
           ids.push(item.evento_id)
       ));
-      setEventos(eventos.filter(evento => ids.includes(evento.id)));        
+      setEventos(allEventos.filter(evento => ids.includes(evento.id)));        
       setShowInscrcoes(!showInscricoes);
       setInscricoes();
+      console.log(ids)
       
     }catch(erro){
       console.log(erro);
@@ -59,7 +73,7 @@ const PageUser = () => {
 
   function setInscricoes(){
     if(showInscricoes){
-      geteventos()
+      meusEventos()
     }
   }
 
@@ -84,7 +98,7 @@ const PageUser = () => {
           <div className={style.dadosUser}>
             {data ? (
                   <>
-                  <h3>{data.name}</h3>
+                  <h3 className={style.name}>{data.name}</h3>
                   <span>{data.email}</span></>)
                       : (<h3>Carregando...</h3>)}
             </div>
@@ -107,10 +121,10 @@ const PageUser = () => {
           </div>
           <div className={style.userEventos}>
            {showInscricoes ? <h1>Minhas inscrições</h1> : <h1>Meus eventos</h1> } 
-          {eventos.map(evento => (
-                <Eventos key={evento.id} id={evento.id} nome={evento.nome} imagem={evento.imagem}/>
+          {eventos ? eventos.map( evento => (
+                <Eventos key={evento.id} id={evento.id} nome={evento.nome} />
 
-              ))}
+              )) : ''}
           </div>
       </div>
       

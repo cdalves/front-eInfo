@@ -4,32 +4,36 @@ import Input from './Forms/Input';
 import useForm from '../Hooks/useForm';
 import { CREAT_EVENTOS } from '../Api';
 import { UserContext } from '../UserContext';
-
+import style from './CreatEventos.module.css';
 
 const CreatEventos = () => {
   
   const eventname = useForm();
-  const descricao = useForm();
+  const [descricao, setDescricao] = React.useState('');
   const qtd = useForm();
   const local = useForm();
   const data = useForm();
   const horario = useForm();
   const [error, seterror] = React.useState(null);
+  const [img, setImg] = React.useState({});
+
+
 
   const {testToken } = React.useContext(UserContext);
   
   async function handleSubmit(event){
-    console.log(eventname.value)
     event.preventDefault();
     const formData = new FormData();
-    //formData.append('img', img.raw);
+    formData.append('img', img.raw);
     formData.append('nome', eventname.value);
-    formData.append('descricao', descricao.value);
+    formData.append('descricao', descricao);
     formData.append('quantidade', qtd.value);
     formData.append('local', local.value);
     formData.append('data', data.value);
     formData.append('horario', horario.value);
+    formData.append('imagem', img.raw);
 
+    console.log(formData)
     
     const token = window.localStorage.getItem("token");
       if(eventname.validate() && token){        
@@ -43,19 +47,47 @@ const CreatEventos = () => {
         }  
       }
   }
+
+  function handleImgChange({ target }) {
+    setImg({
+      preview: URL.createObjectURL(target.files[0]),
+      raw: target.files[0],
+    });
+  }
   
 
   return (
-    <div className='container'>
+    <div className={style.pagEvent}>
       <section>
         <div>   
         <form action="" onSubmit={handleSubmit}>
-            <Input name="name" label="Nome" type="text"{...eventname}/>
-            <Input name="descricao" label="Descrição" type="text" {...descricao}/> 
-            <Input name="quantidade" label="Quantidade de vagas" type="number" {...qtd}/> 
-            <Input name="local" label="Local" type="text" {...local}/> 
-            <Input name="data" label="Data" type="date"{...data}/> 
-            <Input name="horario" label="Horario" type="time" {...horario}/>             
+            <div className={style.itens}>
+              <Input name="name" label="Nome" type="text"{...eventname}/>
+              <label className={style.label} >Descrição</label>
+              <textarea
+              className={style.textarea}
+                  id="descricao"
+                  name="descricao"
+                  placeholder="Descreva o evento..."
+                  value={descricao}
+                  onChange={({ target }) => setDescricao(target.value)}
+                />
+              <Input name="local" label="Local" type="text" {...local}/>
+            </div>
+             
+            <div className={style.itens2}>
+              <Input name="quantidade" label="Vagas" type="number"  {...qtd}/> 
+              <Input name="data" label="Data" type="date"{...data}/> 
+              <Input name="horario" label="Horario" type="time" {...horario}/> 
+              <input
+                type="file"
+                name="img"
+                id="img"
+                onChange={handleImgChange}
+              />
+
+            </div>
+                        
             {error && <p>{error}</p>}
             <Button>Finalizar</Button>
         </form>

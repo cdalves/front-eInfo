@@ -6,7 +6,7 @@ export function CREAT_EVENTOS(formData, token) {
     options: {
       method: 'POST',
       headers: {
-        'Accept': 'Application/json',
+        'Accept': 'Application/json',  
         Authorization: 'Bearer ' + token,
       },
       body: formData,
@@ -130,6 +130,20 @@ export function Get_User(token) {
           'Accept': 'Application/json',
           Authorization: 'Bearer ' + token,
         },
+      },
+    };
+  }
+
+  export function SUBMIT_FORMULARIO(data,token) {
+    return {
+      url: apiURL + '/avaliacoes',
+      options: {
+        method: 'POST',
+        headers: {
+          'Accept': 'Application/json',  
+          Authorization: 'Bearer ' + token,
+        },
+        body: data,
       },
     };
   }
