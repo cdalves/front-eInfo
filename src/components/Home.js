@@ -22,6 +22,7 @@ const Home = () => {
       console.log(erro);
     }
   }
+  console.log(eventos)
 
   if(eventos){
     return(

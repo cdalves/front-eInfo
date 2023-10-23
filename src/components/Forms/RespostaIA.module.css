@@ -1,4 +1,13 @@
 .textarea{
     width: 100%;
     min-height: 400px;
+    background-color: rgb(67, 65, 65);
+    border-radius: 20px;
+    color: white;
+    padding: 20px;
+}
+
+.layout{
+    width: 70%;
+    margin: 13rem auto;
 }

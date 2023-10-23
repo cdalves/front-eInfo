@@ -6,17 +6,19 @@ import style from './RespostaIA.module.css'
 
 const RespostaIA = () => {
     const [resposta, setResposta] = useState('');
-    const [carregando, setCarregando] = useState(null);
+    const [carregando, setCarregando] = useState(false);
 
     const params = useParams();
 
     async function ResponseIA(){
-        setCarregando('Carregando dados...');
+        setCarregando(true);
+        console.log('novo request')
         try{
           const {url, options} = RESPONSE_IA(params.id)
           const response = await fetch(url, options);   
           const data = await response.json();
           setResposta(data);
+          setCarregando(false);
         }catch(erro){
           console.log(erro);
         }
@@ -24,14 +26,14 @@ const RespostaIA = () => {
 
 
   return (
-    <div className='container'>
-
+    <div className={style.layout}>
+        <h1>Analizar os dados com IA</h1>
         <textarea
         className={style.textarea}
-        value={resposta ? resposta : carregando}
+        value={carregando ? 'Carregando dados' : resposta}
         />
       
-      <Button onClick={ResponseIA}>Analisar</Button>
+      <Button onClick={ResponseIA} disabled={carregando} >Analisar</Button>
     </div>
   )
 }
