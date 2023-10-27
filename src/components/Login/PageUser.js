@@ -122,7 +122,7 @@ const PageUser = () => {
           <div className={style.userEventos}>
            {showInscricoes ? <h1>Minhas inscrições</h1> : <h1>Meus eventos</h1> } 
           {eventos ? eventos.map( evento => (
-                <Eventos key={evento.id} id={evento.id} nome={evento.nome} />
+                <Eventos key={evento.id} id={evento.id} nome={evento.nome} imagem={evento.imagem}/>
 
               )) : ''}
           </div>

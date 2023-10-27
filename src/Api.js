@@ -1,4 +1,5 @@
 export const apiURL = "http://127.0.0.1:8000/api";
+export const imgApiUrl = "http://127.0.0.1:8000/storage/"
 
 export function CREAT_EVENTOS(formData, token) {
   return {

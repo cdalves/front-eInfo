@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import style from '../components/EventosPage.module.css'
-import {DELETE_EVENTOS, GET_EVENTO, USER_INSCREVER, eventos} from '../Api'
+import {DELETE_EVENTOS, GET_EVENTO, USER_INSCREVER, eventos, imgApiUrl} from '../Api'
 import Button from './Forms/Button'
 import { Link, useParams } from 'react-router-dom'
 import { UserContext } from '../UserContext'
@@ -54,11 +54,11 @@ const Eventos = () => {
       console.log(erro);
     }
   }
-
+  console.log(evento)
   if(evento){
     return (
       <div className={`${style.layout} container`}>
-          <img className={style.imgEventos} src={eventos[0].imagem}/>
+          <img className={style.imgEventos} src={imgApiUrl + evento.imagem}/>
           <div className={style.info}>
             <h1>{evento.nome}</h1>
             <p>{evento.descricao}</p>
