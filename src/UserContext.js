@@ -10,6 +10,7 @@ export const UserStorage = ({ children }) => {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
   const [testToken, setTestToken] = React.useState(null);
+  const [firstname, setFirstname] = React.useState(null);
 
 
   async function getUser(token) {
@@ -18,6 +19,8 @@ export const UserStorage = ({ children }) => {
     const json = await response.json();
     setData(json);
     setLogin(true);
+    const [nome, ...sobrenome] = json.name.split(" ");
+    setFirstname(nome);
   }
 
   async function userLogin(email, password) {
@@ -35,7 +38,7 @@ export const UserStorage = ({ children }) => {
 
 
   return (
-    <UserContext.Provider value={{ userLogin, data, testToken }}>
+    <UserContext.Provider value={{ userLogin, data, testToken, firstname }}>
       {children}
     </UserContext.Provider>
   );

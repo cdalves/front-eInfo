@@ -30,7 +30,7 @@ const RespostaIA = () => {
         <h1>Analizar os dados com IA</h1>
         <textarea
         className={style.textarea}
-        value={carregando ? 'Carregando dados' : resposta}
+        value={carregando ? 'Carregando dados...Aguarde!' : resposta}
         />
       
       <Button onClick={ResponseIA} disabled={carregando} >Analisar</Button>

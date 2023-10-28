@@ -7,8 +7,7 @@ import { UserContext } from '../UserContext';
 
 const Header = () => {
 
-   const { data } =  React.useContext(UserContext);
-    const [firstname, ...lastname ] = data.name.split(" ")
+  const { data, firstname } =  React.useContext(UserContext);
 
 
   return (
