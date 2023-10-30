@@ -26,7 +26,7 @@ const Login = () => {
   }
 
 
-  if(testToken && token ) return <Navigate to ="/conta"/> 
+  if(testToken && token) return <Navigate to ="/conta"/> 
 
   return (
     <section className={style.areaLogin}>

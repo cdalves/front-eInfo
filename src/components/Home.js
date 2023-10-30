@@ -28,7 +28,7 @@ const Home = () => {
     return(
       <div>
           <div className={"container"}>
-          {eventos.map(evento => (
+          {eventos?.map(evento => (
             <Eventos key={evento.id} id={evento.id} nome={evento.nome} imagem={evento.imagem}/>
 
           ))}

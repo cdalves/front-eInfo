@@ -60,7 +60,7 @@ export function Create_User(body) {
       options: {
         method: 'POST',
         headers: {
-          'Content-Type': 'Application/json', 
+          'Accept': 'Application/json', 
         },
         body: JSON.stringify(body),
       },
@@ -74,7 +74,7 @@ export function GET_TOKEN(body){
           options: {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
+                'Content-Type': 'Application/json',               
             },
             body: JSON.stringify(body),
           },
@@ -88,8 +88,8 @@ export function Get_User(token) {
       options: {
         method: 'POST',
         headers: {
-          'Accept': 'Application/json',
-          Authorization: 'Bearer ' + token,
+          'Content-Type': 'Application/json', 
+           Authorization: 'Bearer ' + token,
         },
       },
     };
@@ -162,30 +162,3 @@ export function Get_User(token) {
   }
   
 
-
-export const eventos = [
-    {
-        id: "1",
-        idUser: "1",
-        name : 'Espera de uma oportunidade',
-        imagem : 'https://www.fainor.com.br/wp-content/uploads/2023/08/pos-graduacao.webp',
-        descricao: ' evento mais aguardado do ano para todos os entusiastas, profissionais e curiosos sobre o mundo da tecnologia. Em um ambiente envolvente e futurista, esta feira inovadora promete ser uma jornada emocionante pelos avanços tecnológicos que estão moldando o nosso mundo.',
-        preFed: {naoVou: 4,
-            talvezVou: 10,
-            vou:20}
-
-    },
-    {
-        id: "2",
-        idUser: "1",
-        name : 'palestra',
-        imagem : 'https://www.tecmobile.com.br/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2021/01/Conheca-os-10-maiores-eventos-do-Brasil-e-aprenda-com-eles.jpg.webp',
-        descricao: 'paslestra sobre tecnologia e desenvolvimento sustentavel',
-        preFed: {
-            naoVou: 0,
-            talvezVou: 0,
-            vou:0
-        }
-
-    }
-]

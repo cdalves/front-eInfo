@@ -48,7 +48,7 @@ const Formulario = () => {
             const {url, options} = SUBMIT_FORMULARIO(formData, token); 
             const response = await fetch(url, options)
             const res = await response.json();
-            console.log(res)
+            alert(res.status);
           }catch(e){
             console.log(e);
           }     
@@ -111,6 +111,7 @@ const Formulario = () => {
                     <input type="radio" name="resposta_4" value="1" required onChange={handleInputChange} checked={data.resposta_4 === "1"}/> 1
                 </label>
                 <label>
+                <input type="radio" name="resposta_4" value="2" required onChange={handleInputChange} checked={data.resposta_4 === "2"}/> 2
                 </label>
                 <label>
                     <input type="radio" name="resposta_4" value="3" required onChange={handleInputChange} checked={data.resposta_4 === "3"}/> 3
@@ -195,8 +196,7 @@ const Formulario = () => {
                 </label>
               </div>
             </div>
-    
-            <button type="submit">Enviar</button>
+            <Button type="submit">Enviar</Button>
           </form>
         </div>
       );
