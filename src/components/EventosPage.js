@@ -70,6 +70,7 @@ const Eventos = () => {
             {evento?.user_id === data?.id ? <Button onClick={deleteEvento}>Deletar evento</Button> : ''}
             <Link to = {`formulario/`} className={style.formulario}>Formulário</Link>            
             {data && evento && evento.user_id === data.id ? <Link to = {`analisar/`} className={style.ia}>Analizar com IA</Link> : ''}
+            <Link to= '/facial'>Reconhecimento facial</Link>
 
 
           </div>        

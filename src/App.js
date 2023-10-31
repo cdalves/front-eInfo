@@ -11,6 +11,7 @@ import PageUser from './components/Login/PageUser';
 import CreatEventos from './components/CreatEventos';
 import Formulario from './components/Forms/Formulario';
 import RespostaIA from './components/Forms/RespostaIA';
+import CamFace from './components/IA/CamFace'
 
 
 function App() {
@@ -30,10 +31,7 @@ function App() {
                 <Route path='/evento/:id/formulario' element={<Formulario/>}/>
                 <Route path='/conta/evento/:id/formulario' element={<Formulario/>}/>
                 <Route path='/conta/evento/:id/analisar' element={<RespostaIA/>}/>
-
-
-
-
+                <Route path='/facial' element={<CamFace/>}/>
             </Routes>
             <Footer/>
             </UserStorage>
