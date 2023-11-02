@@ -4,6 +4,7 @@ import {DELETE_EVENTOS, GET_EVENTO, USER_INSCREVER, eventos, imgApiUrl} from '..
 import Button from './Forms/Button'
 import { Link, useParams } from 'react-router-dom'
 import { UserContext } from '../UserContext'
+import Analisar from './IA/Analisar'
 
 
 const Eventos = () => {
@@ -71,7 +72,7 @@ const Eventos = () => {
             <Link to = {`formulario/`} className={style.formulario}>Formulário</Link>            
             {data && evento && evento.user_id === data.id ? <Link to = {`analisar/`} className={style.ia}>Analizar com IA</Link> : ''}
             <Link to= '/facial'>Reconhecimento facial</Link>
-
+            <Analisar/>
 
           </div>        
       </div>
