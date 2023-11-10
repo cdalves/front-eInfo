@@ -13,9 +13,7 @@ const PageUser = () => {
   const [eventos, setEventos] = React.useState([]);
   const [allEventos, setAllEventos] = React.useState([]);
   const [showInscricoes, setShowInscrcoes] = React.useState(false);
-
   const navigate = useNavigate();
-
 
   const { data } = React.useContext(UserContext);
   const token = window.localStorage.getItem("token");
@@ -62,7 +60,6 @@ const PageUser = () => {
       setEventos(allEventos.filter(evento => ids.includes(evento.id)));        
       setShowInscrcoes(!showInscricoes);
       setInscricoes();
-      console.log(ids)
       
     }catch(erro){
       console.log(erro);

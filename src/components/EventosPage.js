@@ -34,12 +34,10 @@ const Eventos = () => {
     const formData = new FormData();
     formData.append('user_id', data.id);
     formData.append('evento_id', evento.id);
-    console.log(formData);
     if(token && testToken){try{
       const {url, options} = USER_INSCREVER(formData, token);
       const response = await fetch(url, options)
       const res = await response.json();
-      console.log(res)
     }catch(e){
       console.log(e);
     }}
@@ -50,12 +48,10 @@ const Eventos = () => {
       const {url, options} = DELETE_EVENTOS(evento.id, token);
       const response = await fetch(url, options);  
       const data = await response.json();
-      console.log(data)
     }catch(erro){
       console.log(erro);
     }
   }
-  console.log(evento)
   if(evento){
     return (
       <div className={`${style.layout} container`}>
@@ -69,7 +65,9 @@ const Eventos = () => {
 
             {token ? <Button onClick={Inscrever}>Inscrever-se</Button> : ''}
             {evento?.user_id === data?.id ? <Button onClick={deleteEvento}>Deletar evento</Button> : ''}
-            <Link to = {`formulario/`} className={style.formulario}>Formulário</Link>            
+            <Link to = {`formulario/`} className={style.formulario}>Formulário</Link>
+            <Link to = {`editar/`} className={style.formulario}>Editar</Link>
+            
             {data && evento && evento.user_id === data.id ? <Link to = {`analisar/`} className={style.ia}>Analizar com IA</Link> : ''}
             <Link to= '/facial'>Reconhecimento facial</Link>
             <Analisar/>

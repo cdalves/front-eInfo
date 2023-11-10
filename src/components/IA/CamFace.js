@@ -7,23 +7,48 @@ function CamFace() {
   const videoHeight = 480;
   const videoWidth = 640;
   const canvasRef = useRef(); 
+  let results = [];
+  const labels = ['Daniel', 'Sheldon'];
+  
 
-  const loadLabels = () => {
+  // async function loadLabels () {
+  //   const descritores = await JSON.parse(window.localStorage.getItem('descritores'));
+  //   const json = await faceapi.fetchJson(window.localStorage.getItem('descritores'))
+  //   const FACES_URL = process.env.PUBLIC_URL + '/UserFaces';
+  //   const labeledDescriptors = [];
+  //   console.log(json)
+
+  //    for (let i = 0; i <descritores.length ; i++) {
+  //     const descritor = [new Float32Array([...descritores[i]])];
+  //     console.log(descritor)
+  //      labeledDescriptors.push( 
+  //       new faceapi.LabeledFaceDescriptors(
+  //         descritor[i].label,descritor
+  //         )) 
+
+  //    }
+  //    console.log(labeledDescriptors)
+  //    return labeledDescriptors;        
+  // }
+
+
+  const loadLabels = () => {  
     const FACES_URL = process.env.PUBLIC_URL + '/UserFaces';
-    const labels = ['Sheldon','Daniel']
-    return Promise.all(labels.map(async label => {
-        const descriptions = []
-        for (let i = 1; i <= 3; i++) {
-            const img = await faceapi.fetchImage(`${FACES_URL}/${label}/${i}.jpg`)
-            const detections = await faceapi
-                .detectSingleFace(img)
-                .withFaceLandmarks()
-                .withFaceDescriptor()
-            descriptions.push(detections.descriptor);
-        }
-        return new faceapi.LabeledFaceDescriptors(label, descriptions);
-    }))
-  }
+     
+     return Promise.all(labels.map(async label => {
+         const descriptions = []
+         for (let i = 1; i <= 1; i++) {
+             const img = await faceapi.fetchImage(`${FACES_URL}/${label}/${i}.jpg`)
+             const detections = await faceapi
+                 .detectSingleFace(img)
+                 .withFaceLandmarks()
+                 .withFaceDescriptor()
+             descriptions.push(detections.descriptor);
+         }
+         return new faceapi.LabeledFaceDescriptors(label, descriptions);
+     }))
+
+ }
  
   const startVideo = () => {   
     navigator.mediaDevices
@@ -38,8 +63,7 @@ function CamFace() {
   
   };
  
- 
-      const MODEL_URL = process.env.PUBLIC_URL + '/models'; 
+    const MODEL_URL = process.env.PUBLIC_URL + '/models'; 
       Promise.all([
         faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
         faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
@@ -66,16 +90,15 @@ function CamFace() {
         const resizedDetections = faceapi.resizeResults(detections, displaySize);
         
         const labels = await loadLabels();
-        //const labels = await JSON.parse(window.localStorage.getItem('allDescriptions'));
-        console.log(labels)
+        //console.log(labels)
         
         const faceMatcher = new faceapi.FaceMatcher(labels, 0.6);
-        const results = resizedDetections.map(d =>
+        results = resizedDetections.map(d =>
             faceMatcher.findBestMatch(d.descriptor)
         )
         
-        console.log(results)
-
+        console.log(results[0]?.label)
+        
 
           await canvasRef.current.getContext('2d').clearRect(0, 0, videoRef.Width, videoRef.Height);
            faceapi.draw.drawDetections(canvasRef.current, resizedDetections);
@@ -92,6 +115,22 @@ function CamFace() {
       }
     }, 5000)
   }
+
+  useEffect(() => {
+    const newdata = [];
+    let data = JSON.parse(localStorage.getItem("data"))
+    
+    
+      
+    
+    if(newdata){
+      data = localStorage.getItem("data") ? JSON.parse(localStorage.getItem("data")) : [];
+      data.push(newdata);
+      localStorage.setItem("data", JSON.stringify(data));
+      console.log(data)
+    }
+  }, [results]);
+
   
 
 

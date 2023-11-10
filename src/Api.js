@@ -27,16 +27,29 @@ export function GET_EVENTO(id) {
   };
 }
 
+export function UPDATE_EVENTOS(formData, token, id) {
+  return {
+    url: `${apiURL}/evento/${id}`,
+    options: {
+      method: 'PUT',
+      headers: {
+        'Accept': 'Application/json',  
+        Authorization: 'Bearer ' + token,
+      },
+      body: formData,
+    },
+  };
+}
+
 export function DELETE_EVENTOS(id, token) {
   return {
-    url: apiURL + '/evento',
+    url:`${apiURL}/evento/${id}`,
     options: {
       method: 'DELETE',
       headers: {
         'Accept': 'Application/json',
         Authorization: 'Bearer ' + token,
       },
-      body: JSON.stringify(id),
     },
   };
 }
