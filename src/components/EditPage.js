@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { GET_EVENTO, UPDATE_EVENTOS } from '../Api';
+import { GET_EVENTO, UPDATE_EVENTOS, imgApiUrl } from '../Api';
 import { useParams } from 'react-router-dom';
 import style from './EditPage.module.css'
 import useForm from '../Hooks/useForm';
@@ -34,7 +34,7 @@ const EditPage = () => {
             setData(data.data)
             setLocal(data.local);
             setHorario(data.horario);
-
+            setImg(imgApiUrl + data.imagem)
         }catch(erro){
             console.log(erro);
         }
@@ -68,7 +68,7 @@ const EditPage = () => {
         const id = params.id;
           if(token){        
             try{
-              const {url, options} = UPDATE_EVENTOS(formData, token, id)
+              const {url, options} = UPDATE_EVENTOS(formData, token, params.id)
               const response = await fetch(url, options);   
               const json = await response.json();
               seterror(json.message);

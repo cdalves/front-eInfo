@@ -33,7 +33,7 @@ export function UPDATE_EVENTOS(formData, token, id) {
     options: {
       method: 'PUT',
       headers: {
-        'Accept': 'Application/json',  
+        'Content-Type': 'Application/json',   
         Authorization: 'Bearer ' + token,
       },
       body: formData,

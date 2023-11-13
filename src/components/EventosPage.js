@@ -45,7 +45,7 @@ const Eventos = () => {
 
   async function deleteEvento(){
     try{
-      const {url, options} = DELETE_EVENTOS(evento.id, token);
+      const {url, options} = DELETE_EVENTOS(params.id, token);
       const response = await fetch(url, options);  
       const data = await response.json();
     }catch(erro){
