@@ -13,7 +13,7 @@
 
 .userArea{
     width: 400px;
-    height: 450px;
+    height: 500px;
     background-color: rgba(117, 116, 116, 0.356);
     border-radius: 10px;
     grid-area: "userArea";

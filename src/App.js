@@ -13,6 +13,7 @@ import Formulario from './components/Forms/Formulario';
 import RespostaIA from './components/Forms/RespostaIA';
 import CamFace from './components/IA/CamFace'
 import EditPage from './components/EditPage';
+import AddFAce from './components/IA/AddFAce';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
                 <Route path='/conta/evento/:id/analisar' element={<RespostaIA/>}/>
                 <Route path='/facial' element={<CamFace/>}/>
                 <Route path='/conta/evento/:id/editar' element={<EditPage/>}/>
+                <Route path='/addFace' element={<AddFAce/>}/>
 
             </Routes>
             <Footer/>

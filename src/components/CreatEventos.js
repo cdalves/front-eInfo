@@ -84,6 +84,7 @@ const CreatEventos = () => {
                 name="img"
                 id="img"
                 onChange={handleImgChange}
+                accept=".jpg, .jpeg, .png"
               />
 
             </div>
