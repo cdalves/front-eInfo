@@ -27,6 +27,18 @@ export function GET_EVENTO(id) {
   };
 }
 
+export function BUSCA_EVENTO(name) {
+  return {
+    url: apiURL + '/evento?nome=' + name,
+    options: {
+      method: 'GET',
+      headers: {
+        'Accept': 'Application/json', 
+      },
+    },
+  };
+}
+
 export function UPDATE_EVENTOS(formData, token, id) {
   return {
     url: `${apiURL}/evento/${id}`,

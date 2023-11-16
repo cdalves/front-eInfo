@@ -35,8 +35,16 @@ const AddFAce = () => {
             .detectSingleFace(img)
             .withFaceLandmarks()
             .withFaceDescriptor();
-            alert("rosto cadastrado com sucesso!!")
-            console.log(detections.descriptor)
+            alert("rosto cadastrado com sucesso!!")  
+
+            if(detections){
+              let descritores = Array.from(detections.descriptor)//convert float32Array into number[]
+              window.localStorage.setItem('descritores', JSON.stringify(descritores));
+              console.log(descritores);
+              alert("FAce cadastrada com sucesso!!");
+            }else{
+              alert("Erro! Verifique a imagem e tente novamente")
+            }
       }
   
     return (

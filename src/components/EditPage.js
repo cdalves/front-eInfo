@@ -19,6 +19,15 @@ const EditPage = () => {
     const [img, setImg] = React.useState({});
 
 
+
+    function formDataToJson(formData) {
+      const json = {};
+      formData.forEach((value, key) => {
+        json[key] = value;
+      });
+      return json;
+    }
+
     React.useEffect(() => {
         geteventos();
        }, [params.id]);
@@ -34,7 +43,6 @@ const EditPage = () => {
             setData(data.data)
             setLocal(data.local);
             setHorario(data.horario);
-            setImg(imgApiUrl + data.imagem)
         }catch(erro){
             console.log(erro);
         }
@@ -53,16 +61,15 @@ const EditPage = () => {
       async function handleSubmit(event){
         event.preventDefault();
         const formData = new FormData();
-        formData.append('img', img.raw);
-        formData.append('nome', eventname.value);
+        formData.append('nome', eventname);
         formData.append('descricao', descricao);
-        formData.append('quantidade', qtd.value);
-        formData.append('local', local.value);
-        formData.append('data', data.value);
-        formData.append('horario', horario.value);
+        formData.append('quantidade', qtd);
+        formData.append('local', local);
+        formData.append('data', data);
+        formData.append('horario', horario);
         formData.append('imagem', img.raw);
     
-        console.log(formData)
+        console.log(formDataToJson(formData))
         
         const token = window.localStorage.getItem("token");
         const id = params.id;

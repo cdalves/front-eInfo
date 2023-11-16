@@ -63,13 +63,13 @@ const Eventos = () => {
             <h4>{evento.data}</h4>
             <h4>{evento.horario}</h4>
 
-            {token ? <Button onClick={Inscrever}>Inscrever-se</Button> : ''}
+            {token ? <Button onClick={Inscrever} >Inscrever-se</Button> : ''}
             {evento?.user_id === data?.id ? <Button onClick={deleteEvento}>Deletar evento</Button> : ''}
-            <Link to = {`formulario/`} className={style.formulario}>Formulário</Link>
-            <Link to = {`editar/`} className={style.formulario}>Editar</Link>
+            <Link to = {`formulario/`} className={style.btn}>Formulário</Link>
+            <Link to = {`editar/`} className={style.btn}>Editar</Link>
             
-            {data && evento && evento.user_id === data.id ? <Link to = {`analisar/`} className={style.ia}>Analizar com IA</Link> : ''}
-            <Link to= '/facial'>Reconhecimento facial</Link>
+            {data && evento && evento.user_id === data.id ? <Link to= '/facial' className={style.btn}>Reconhecimento facial</Link> : ''}
+            
             <Analisar/>
 
           </div>        

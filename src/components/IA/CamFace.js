@@ -8,47 +8,45 @@ function CamFace() {
   const videoWidth = 640;
   const canvasRef = useRef(); 
   let results = [];
-  const labels = ['Daniel', 'Sheldon'];
+  const labels = ['Daniel','daniel2'];
   
 
-  // async function loadLabels () {
-  //   const descritores = await JSON.parse(window.localStorage.getItem('descritores'));
-  //   const json = await faceapi.fetchJson(window.localStorage.getItem('descritores'))
-  //   const FACES_URL = process.env.PUBLIC_URL + '/UserFaces';
-  //   const labeledDescriptors = [];
-  //   console.log(json)
+  async function loadLabels () {
+    const descritores = await JSON.parse(window.localStorage.getItem('descritores'));
+    //const json = await faceapi.fetchJson(window.localStorage.getItem('descritores'))
 
-  //    for (let i = 0; i <descritores.length ; i++) {
-  //     const descritor = [new Float32Array([...descritores[i]])];
-  //     console.log(descritor)
-  //      labeledDescriptors.push( 
-  //       new faceapi.LabeledFaceDescriptors(
-  //         descritor[i].label,descritor
-  //         )) 
-
-  //    }
-  //    console.log(labeledDescriptors)
-  //    return labeledDescriptors;        
-  // }
-
-
-  const loadLabels = () => {  
-    const FACES_URL = process.env.PUBLIC_URL + '/UserFaces';
      
-     return Promise.all(labels.map(async label => {
-         const descriptions = []
-         for (let i = 1; i <= 1; i++) {
-             const img = await faceapi.fetchImage(`${FACES_URL}/${label}/${i}.jpg`)
-             const detections = await faceapi
-                 .detectSingleFace(img)
-                 .withFaceLandmarks()
-                 .withFaceDescriptor()
-             descriptions.push(detections.descriptor);
-         }
-         return new faceapi.LabeledFaceDescriptors(label, descriptions);
-     }))
+      const descritor = [new Float32Array([...descritores])];
+      //console.log(descritor)
+    const labeledDescriptors = [];
+    for(let i=0; i< 2; i++){
+      labeledDescriptors.push( 
+        new faceapi.LabeledFaceDescriptors( labels[i], descritor)
+      )
+    }
+      
 
- }
+     console.log(labeledDescriptors)
+     return labeledDescriptors;        
+  }
+
+
+  // const loadLabels = () => {  
+  //   const FACES_URL = process.env.PUBLIC_URL + '/UserFaces';
+     
+  //    return Promise.all(labels.map(async label => {
+  //        const descriptions = []
+  //        for (let i = 1; i <= 1; i++) {
+  //            const img = await faceapi.fetchImage(`${FACES_URL}/${label}/${i}.jpg`)
+  //            const detections = await faceapi
+  //                .detectSingleFace(img)
+  //                .withFaceLandmarks()
+  //                .withFaceDescriptor()
+  //            descriptions.push(detections.descriptor);
+  //        }
+  //        return new faceapi.LabeledFaceDescriptors(label, descriptions);
+  //    }))
+  // }
  
   const startVideo = () => {   
     navigator.mediaDevices
