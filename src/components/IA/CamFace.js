@@ -1,6 +1,9 @@
 import * as faceapi from 'face-api.js';
 import React, { useEffect, useRef, useState } from 'react';
 import style from "./CamFace.module.css"
+import { useParams } from 'react-router-dom';
+import { EVENTO_INSCRICOES } from '../../Api';
+import Button from '../Forms/Button';
 
 function CamFace() {
   const videoRef = useRef();
@@ -9,10 +12,37 @@ function CamFace() {
   const canvasRef = useRef(); 
   let results = [];
   const labels = ['Daniel','daniel2'];
+  const params = useParams();
+  const [usuarios, setUsuarios] = useState([]);
+
+  async function InscritosEvento(){
+    const token = window.localStorage.getItem("token");
+    try{
+      const {url, options} = EVENTO_INSCRICOES(token, 1)
+      const response = await fetch(url, options);   
+      const data = await response.json();
+      setUsuarios(data)
+      startVideo()
+    }catch(erro){
+      console.log(erro);
+    }
+  }
   
+  async function GetDados() {
+    const descritores = await JSON.parse(usuarios[3].descriptor)
+    const descritor = await [new Float32Array([...descritores])];
+    const labeledDescriptors = [];
+    labeledDescriptors.push( 
+    new faceapi.LabeledFaceDescriptors(usuarios[3].name, descritor))
+    console.log(labeledDescriptors)
+
+    return labeledDescriptors;        
+    
+   }
 
   async function loadLabels () {
     const descritores = await JSON.parse(window.localStorage.getItem('descritores'));
+    //console.log(descritores)
     //const json = await faceapi.fetchJson(window.localStorage.getItem('descritores'))
 
      
@@ -26,27 +56,11 @@ function CamFace() {
     }
       
 
-     console.log(labeledDescriptors)
+     
      return labeledDescriptors;        
   }
 
 
-  // const loadLabels = () => {  
-  //   const FACES_URL = process.env.PUBLIC_URL + '/UserFaces';
-     
-  //    return Promise.all(labels.map(async label => {
-  //        const descriptions = []
-  //        for (let i = 1; i <= 1; i++) {
-  //            const img = await faceapi.fetchImage(`${FACES_URL}/${label}/${i}.jpg`)
-  //            const detections = await faceapi
-  //                .detectSingleFace(img)
-  //                .withFaceLandmarks()
-  //                .withFaceDescriptor()
-  //            descriptions.push(detections.descriptor);
-  //        }
-  //        return new faceapi.LabeledFaceDescriptors(label, descriptions);
-  //    }))
-  // }
  
   const startVideo = () => {   
     navigator.mediaDevices
@@ -66,9 +80,8 @@ function CamFace() {
         faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
         faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
         faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
-        faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
         faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL),
-      ]).then(startVideo); 
+      ]); 
 
   async function handleVideoOnPlay(){
     setInterval(async () => {
@@ -87,7 +100,7 @@ function CamFace() {
           .withFaceDescriptors();
         const resizedDetections = faceapi.resizeResults(detections, displaySize);
         
-        const labels = await loadLabels();
+        const labels = await GetDados();
         //console.log(labels)
         
         const faceMatcher = new faceapi.FaceMatcher(labels, 0.6);
@@ -125,7 +138,7 @@ function CamFace() {
       data = localStorage.getItem("data") ? JSON.parse(localStorage.getItem("data")) : [];
       data.push(newdata);
       localStorage.setItem("data", JSON.stringify(data));
-      console.log(data)
+    
     }
   }, [results]);
 
@@ -138,6 +151,7 @@ function CamFace() {
         <video ref={videoRef} height={videoHeight} width={videoWidth} onPlay={handleVideoOnPlay}/>
         <canvas ref={canvasRef} style={{ position: 'absolute', left: '0' }} />            
       </div>
+      <Button onClick={InscritosEvento}>caregar dados</Button>
     </div>
   );
 }

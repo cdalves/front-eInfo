@@ -68,7 +68,8 @@ const Eventos = () => {
             <Link to = {`formulario/`} className={style.btn}>Formulário</Link>
             <Link to = {`editar/`} className={style.btn}>Editar</Link>
             
-            {data && evento && evento.user_id === data.id ? <Link to= '/facial' className={style.btn}>Reconhecimento facial</Link> : ''}
+            {/* {data && evento && evento.user_id === data.id ? <Link to= '/facial' className={style.btn}>Reconhecimento facial</Link> : ''} */}
+            <Link to= '/facial' className={style.btn}>Reconhecimento facial</Link> 
             
             <Analisar/>
 

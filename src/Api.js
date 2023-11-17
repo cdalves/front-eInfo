@@ -79,7 +79,7 @@ export function USER_EVENTOS(token) {
   };
 }
 
-export function Create_User(body) {
+export function Create_User(formData) {
     return {
       url: apiURL + '/usuario',
       options: {
@@ -87,7 +87,7 @@ export function Create_User(body) {
         headers: {
           'Accept': 'Application/json', 
         },
-        body: JSON.stringify(body),
+        body: formData,
       },
     };
 }
@@ -143,6 +143,19 @@ export function Get_User(token) {
           Authorization: 'Bearer ' + token,
         },
         body: formData,
+      },
+    };
+  }
+
+  export function EVENTO_INSCRICOES(token, id) {
+    return {
+      url: apiURL + '/inscritos-evento/' + id,
+      options: {
+        method: 'GET',
+        headers: {
+          'Accept': 'Application/json',
+          Authorization: 'Bearer ' + token,
+        },
       },
     };
   }

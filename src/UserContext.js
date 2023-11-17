@@ -28,7 +28,7 @@ export const UserStorage = ({ children }) => {
       const { url, options } = GET_TOKEN({ email, password });
       const tokenRes = await fetch(url, options);
       const json = await tokenRes.json();
-      window.localStorage.setItem('token',json.data.token );
+      window.localStorage.setItem('token', json.data.token);
       setTestToken(tokenRes.ok)
       getUser(json.data.token);
     }catch(erro){
