@@ -17,27 +17,19 @@ const Sigin = () => {
   const [img, setImg] = React.useState(null);
   const [descritor, setDescritor] = React.useState([]);
 
-
-    const MODEL_URL = process.env.PUBLIC_URL + '/models'; 
-          Promise.all([
-            faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
-            faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
-            faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
-            faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL),
-          ]);  
   
   async function handleSubmit(event){
     event.preventDefault();
-    const parceArray = Array.from(descritor)
+    let descritores =Array.from(descritor);
+    const descriptor= JSON.stringify(descritores);
       if(email.validate() && password.validate()){
-        const formData = new FormData();
-        formData.append('name', username);
-        formData.append('email', email);
-        formData.append('password', password);
-        formData.append('descriptor', 'testando');
-
         try{
-          const { url, options } = Create_User(formData);      
+          const { url, options } = Create_User({
+            name: username,
+            email: email,
+            password: password,
+            descriptor: descriptor,
+          });      
           const response = await fetch(url, options);
           const json = await response.json();   
           console.log(json)   

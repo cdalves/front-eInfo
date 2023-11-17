@@ -28,38 +28,20 @@ function CamFace() {
     }
   }
   
-  async function GetDados() {
-    const descritores = await JSON.parse(usuarios[3].descriptor)
-    const descritor = await [new Float32Array([...descritores])];
+  async function GetDados() {    
     const labeledDescriptors = [];
-    labeledDescriptors.push( 
-    new faceapi.LabeledFaceDescriptors(usuarios[3].name, descritor))
+    for(let i=0; i< usuarios.length; i++){
+      const descritores = await JSON.parse(usuarios[i].descriptor)
+      const descritor = await [new Float32Array([...descritores])];
+      labeledDescriptors.push( 
+        new faceapi.LabeledFaceDescriptors(usuarios[i].name, descritor))
+    }
+
     console.log(labeledDescriptors)
 
     return labeledDescriptors;        
     
-   }
-
-  async function loadLabels () {
-    const descritores = await JSON.parse(window.localStorage.getItem('descritores'));
-    //console.log(descritores)
-    //const json = await faceapi.fetchJson(window.localStorage.getItem('descritores'))
-
-     
-      const descritor = [new Float32Array([...descritores])];
-      //console.log(descritor)
-    const labeledDescriptors = [];
-    for(let i=0; i< 2; i++){
-      labeledDescriptors.push( 
-        new faceapi.LabeledFaceDescriptors( labels[i], descritor)
-      )
-    }
-      
-
-     
-     return labeledDescriptors;        
   }
-
 
  
   const startVideo = () => {   
@@ -108,7 +90,7 @@ function CamFace() {
             faceMatcher.findBestMatch(d.descriptor)
         )
         
-        console.log(results[0]?.label)
+        console.log(results)
         
 
           await canvasRef.current.getContext('2d').clearRect(0, 0, videoRef.Width, videoRef.Height);
@@ -124,7 +106,7 @@ function CamFace() {
         // })
         
       }
-    }, 5000)
+    }, 10000)
   }
 
   useEffect(() => {
