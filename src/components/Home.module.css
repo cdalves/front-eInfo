@@ -9,11 +9,13 @@
 .principal {
   min-width: 800px;
   grid-area: principal;
-  margin: 0 20px;
+  margin: 0 40px;
 }
 
 .secundario {
-  background-color: rgba(117, 116, 116, 0.356);
+  background-image: url(/src/Assets/fundo-busca.jpg);
+  /* background-color: #000000a7; */
+  background-position: top left;
   border-radius: 10px;
   width: 400px;
   height: 80vh;
@@ -33,9 +35,9 @@
   width: 100%;
   height: 3rem;
   margin-top: 20px;
-  border-radius: 5px;
-  background-color: rgba(86, 85, 85, 0.684);
-  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 10px;
 
 }
 .resultado{
@@ -44,12 +46,8 @@
   margin-top: 20px;
 }
 
-/* .btnBusca{
-  width: 150px;
-  border-radius: 5px;
-  background-color:rgb(17, 164, 66);
-  color: rgb(255, 255, 255);
-  font-size: 1rem;
-} */
+.ultimosev{
+  margin-top: 20px;
+}
 
 

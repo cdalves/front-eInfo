@@ -7,8 +7,8 @@ import Button from '../Forms/Button';
 
 function CamFace() {
   const videoRef = useRef();
-  const videoHeight = 480;
-  const videoWidth = 640;
+  const videoHeight = 720;
+  const videoWidth = 1080;
   const canvasRef = useRef(); 
   let results = [];
   const params = useParams();
@@ -45,7 +45,7 @@ function CamFace() {
  
   const startVideo = () => {   
     navigator.mediaDevices
-      .getUserMedia({ video: { width: 640 } })
+      .getUserMedia({ video: { width: 720 } })
       .then(stream => {
         videoRef.current.srcObject = stream;
         videoRef.current.play();
@@ -125,12 +125,15 @@ function CamFace() {
 
 
   return (
-    <div className={style.container}>
-      <div >
-        <video ref={videoRef} height={videoHeight} width={videoWidth} onPlay={handleVideoOnPlay}/>
-        <canvas ref={canvasRef} style={{ position: 'absolute', left: '0' }} />            
+    <div >
+      <div className={style.container}>
+        <video ref={videoRef} height={videoHeight} width={videoWidth} onPlay={handleVideoOnPlay} className={style.video} />
+        <canvas ref={canvasRef} className={style.canvas} /> 
+                   
       </div>
-      <Button onClick={InscritosEvento}>caregar dados</Button>
+      <div className={style.btn}>
+        <Button  onClick={InscritosEvento}>caregar dados</Button>
+      </div>
     </div>
   );
 }

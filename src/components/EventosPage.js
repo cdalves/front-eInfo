@@ -70,8 +70,6 @@ const Eventos = () => {
             
             {/* {data && evento && evento.user_id === data.id ? <Link to= '/facial' className={style.btn}>Reconhecimento facial</Link> : ''} */}
             <Link to= '/facial' className={style.btn}>Reconhecimento facial</Link> 
-            
-            <Analisar/>
 
           </div>        
       </div>

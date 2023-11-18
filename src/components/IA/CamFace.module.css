@@ -1,22 +1,28 @@
-.container{
+.container {
+    width: 1080px;
+    margin: 0 auto;
     margin-top: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; 
 }
 
-.grid{
-    display: grid;
-    grid-template-areas: "video grafico";
+.video {
+    width: 1080px; 
+    height: 720px;
+
 }
 
-.video{
-    min-width: 640px;
-    grid-area: "video";
-    grid-column: video;
-    grid-row: video;
+.canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1080px;
+    height: 720px;
 }
 
-.grafico{
-    border: 1px solid green;
-    grid-area: "grafico";
-    grid-column: grafico;
-    grid-row: grafico;
+.btn{
+    display: flex;
+    justify-content: center;
 }
