@@ -11,7 +11,6 @@ function CamFace() {
   const videoWidth = 640;
   const canvasRef = useRef(); 
   let results = [];
-  const labels = ['Daniel','daniel2'];
   const params = useParams();
   const [usuarios, setUsuarios] = useState([]);
 

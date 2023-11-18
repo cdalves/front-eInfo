@@ -14,22 +14,23 @@ const Sigin = () => {
   const password = useForm();
   const password2 = useForm();
   const [error, seterror] = React.useState(null);
-  const [img, setImg] = React.useState(null);
   const [descritor, setDescritor] = React.useState([]);
 
+
+  
   
   async function handleSubmit(event){
     event.preventDefault();
-    let descritores =Array.from(descritor);
-    const descriptor= JSON.stringify(descritores);
+
       if(email.validate() && password.validate()){
+        const formData = new FormData();
+        formData.append('name', username.value);
+        formData.append('email', email.value);
+        formData.append('password', password.value);
+        formData.append('descriptor', descritor);
+
         try{
-          const { url, options } = Create_User({
-            name: username,
-            email: email,
-            password: password,
-            descriptor: descriptor,
-          });      
+          const { url, options } = Create_User(formData);      
           const response = await fetch(url, options);
           const json = await response.json();   
           console.log(json)   
@@ -40,12 +41,19 @@ const Sigin = () => {
   }
 
   async function handleImgChange(event) {
+    const MODEL_URL = process.env.PUBLIC_URL + '/models'; 
+    await Promise.all([
+      faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
+      faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
+      faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URL),
+    ]);  
+
     const file = await faceapi.bufferToImage(event.target.files[0]);
     const detections = await faceapi
         .detectSingleFace(file)
         .withFaceLandmarks()
         .withFaceDescriptor();  
-        setDescritor(Array.from(detections.descriptor));
+        setDescritor(JSON.stringify(Array.from(detections.descriptor)));
         console.log(JSON.stringify(detections.descriptor))
   }
 

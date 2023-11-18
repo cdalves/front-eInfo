@@ -79,7 +79,7 @@ export function USER_EVENTOS(token) {
   };
 }
 
-export function Create_User(body) {
+export function Create_User(formData) {
     return {
       url: apiURL + '/usuario',
       options: {
@@ -87,7 +87,7 @@ export function Create_User(body) {
         headers: {
           'Accept': 'Application/json', 
         },
-        body: JSON.stringify(body),
+        body: formData,
       },
     };
 }
