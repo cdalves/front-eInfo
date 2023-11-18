@@ -147,6 +147,18 @@ export function Get_User(token) {
     };
   }
 
+  export function LISTA_PRESENCA(token, id) {
+    return {
+      url: apiURL + '/registrar-presenca/' + id,
+      options: {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'Application/json', 
+           Authorization: 'Bearer ' + token,
+        },
+      },
+    };
+  }
   export function EVENTO_INSCRICOES(token, id) {
     return {
       url: apiURL + '/inscritos-evento/' + id,
