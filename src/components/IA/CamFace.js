@@ -12,7 +12,7 @@ function CamFace() {
   const canvasRef = useRef(); 
   let results = [];
   const params = useParams();
-  const [usuarios, setUsuarios] = useState([]);
+  const [inscricoes, setInscricoes] = useState([]);
 
   async function InscritosEvento(){
     const token = window.localStorage.getItem("token");
@@ -20,25 +20,25 @@ function CamFace() {
       const {url, options} = EVENTO_INSCRICOES(token, 1)
       const response = await fetch(url, options);   
       const data = await response.json();
-      setUsuarios(data)
+      setInscricoes(data)
       startVideo()
     }catch(erro){
       console.log(erro);
     }
   }
   
-  async function GetDados() {    
+  async function GetDados() {   
+
     const labeledDescriptors = [];
-    for(let i=0; i< usuarios.length; i++){
-      const descritores = await JSON.parse(usuarios[i].descriptor)
+    for(let i=0; i< inscricoes.length; i++){
+      const descritores = await JSON.parse(inscricoes[i].descriptor)
       const descritor = await [new Float32Array([...descritores])];
+      const identificador = inscricoes[i].name +' '+ inscricoes[i].id;
       labeledDescriptors.push( 
-        new faceapi.LabeledFaceDescriptors(usuarios[i].name, descritor))
+        new faceapi.LabeledFaceDescriptors(identificador, descritor))
     }
 
-    console.log(labeledDescriptors)
-
-    return labeledDescriptors;        
+    return labeledDescriptors; 
     
   }
 
@@ -106,15 +106,12 @@ function CamFace() {
         // })
         
       }
-    }, 10000)
+    }, 1000)
   }
 
   useEffect(() => {
     const newdata = [];
-    let data = JSON.parse(localStorage.getItem("data"))
-    
-    
-      
+    let data = JSON.parse(localStorage.getItem("data"))   
     
     if(newdata){
       data = localStorage.getItem("data") ? JSON.parse(localStorage.getItem("data")) : [];
