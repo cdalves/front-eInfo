@@ -41,7 +41,7 @@ export function BUSCA_EVENTO(name) {
 
 export function UPDATE_EVENTOS(formData, token, id) {
   return {
-    url: `${apiURL}/evento/${id}`,
+    url: apiURL + '/evento/' + id,
     options: {
       method: 'PUT',
       headers: {

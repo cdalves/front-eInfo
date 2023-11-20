@@ -3,7 +3,7 @@ import './App.css';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Home from './components/Home';
-import Sigin from './components/Sigin/Sigin';
+import Sign from './components/Sign/Sign';
 import Login from './components/Login/Login';
 import { UserStorage } from './UserContext';
 import EventosPage from './components/EventosPage';
@@ -25,7 +25,7 @@ function App() {
             <Routes>
                 <Route path='/*' element={<Home/>}/>
                 <Route path='/evento/:id' element={<EventosPage/>}/>
-                <Route path='/cadastro' element={<Sigin/>}/>
+                <Route path='/cadastro' element={<Sign/>}/>
                 <Route path='/entrar/*' element={<Login/>}/>
                 <Route path='/conta/*' element={<PageUser/>}/>
                 <Route path='/conta/evento/:id' element={<EventosPage/>}/>

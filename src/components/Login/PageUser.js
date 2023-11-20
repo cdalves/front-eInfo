@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 
-
 const PageUser = () => {
   const [eventos, setEventos] = React.useState([]);
   const [allEventos, setAllEventos] = React.useState([]);
@@ -17,7 +16,6 @@ const PageUser = () => {
 
   const { data } = React.useContext(UserContext);
   const token = window.localStorage.getItem("token");
-  
   
   React.useEffect(() => {
     meusEventos();
@@ -86,7 +84,6 @@ const PageUser = () => {
     }
   }
    
-
   return (
     <div className={style.layout}>
       <div className={style.grid}>

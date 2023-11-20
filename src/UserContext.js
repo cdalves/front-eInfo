@@ -7,7 +7,6 @@ export const UserContext = React.createContext();
 export const UserStorage = ({ children }) => {
   const [data, setData] = React.useState(null);
   const [login, setLogin] = React.useState(null);
-  const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
   const [testToken, setTestToken] = React.useState(null);
   const [firstname, setFirstname] = React.useState(null);
@@ -29,16 +28,15 @@ export const UserStorage = ({ children }) => {
       const tokenRes = await fetch(url, options);
       const json = await tokenRes.json();
       window.localStorage.setItem('token', json.data.token);
-      setTestToken(tokenRes.ok)
+      setTestToken(tokenRes.ok);
       getUser(json.data.token);
     }catch(erro){
-      console.log(erro);
+      setError('Verifique email/senha')
     }
   }
 
-
   return (
-    <UserContext.Provider value={{ userLogin, data, testToken, firstname }}>
+    <UserContext.Provider value={{ userLogin, data, testToken, firstname, error}}>
       {children}
     </UserContext.Provider>
   );

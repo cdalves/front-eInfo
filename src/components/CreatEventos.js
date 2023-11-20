@@ -32,8 +32,6 @@ const CreatEventos = () => {
     formData.append('data', data.value);
     formData.append('horario', horario.value);
     formData.append('imagem', img.raw);
-
-    console.log(formData)
     
     const token = window.localStorage.getItem("token");
       if(eventname.validate() && token){        
@@ -44,9 +42,13 @@ const CreatEventos = () => {
           seterror(json.message);
         }catch(e){          
           console.log(e);
-        }  
+
+        }
+         
       }
   }
+
+
 
   function handleImgChange({ target }) {
     setImg({
@@ -86,7 +88,7 @@ const CreatEventos = () => {
                 onChange={handleImgChange}
                 accept=".jpg, .jpeg, .png"
               />
-
+             {img.preview && <img src={img.preview} alt="Preview" className= {style.img} />}
             </div>
                         
             {error && <p>{error}</p>}

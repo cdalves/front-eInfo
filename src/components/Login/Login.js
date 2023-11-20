@@ -12,9 +12,8 @@ import { Link } from 'react-router-dom/dist';
 const Login = () => {
   const email = useForm();
   const password = useForm();
-  const [error, seterror] = React.useState(null)
 
-  const { userLogin, testToken } = React.useContext(UserContext);
+  const { userLogin, testToken, error } = React.useContext(UserContext);
   const token = window.localStorage.getItem("token");
 
 

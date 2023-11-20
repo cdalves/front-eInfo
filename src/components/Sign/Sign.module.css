@@ -7,7 +7,7 @@
     margin-bottom: 500px;
 }
 
-.sigin{
+.sign{
     width: 90%;
     margin: auto;
     text-align: center;
@@ -20,6 +20,15 @@
     width: 20%;
 }
 
+.info{
+    margin: 20px;
+}
+
+.upload{
+    margin-bottom: 20px;
+    font-size: 1rem;
+
+}
 
 .error{
     color: red;

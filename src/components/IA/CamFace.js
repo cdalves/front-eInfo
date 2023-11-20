@@ -1,5 +1,5 @@
 import * as faceapi from 'face-api.js';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import style from "./CamFace.module.css"
 import { useParams } from 'react-router-dom';
 import { EVENTO_INSCRICOES, LISTA_PRESENCA } from '../../Api';
@@ -17,7 +17,7 @@ function CamFace() {
   async function InscritosEvento(){
     const token = window.localStorage.getItem("token");
     try{
-      const {url, options} = EVENTO_INSCRICOES(token, 1)
+      const {url, options} = EVENTO_INSCRICOES(token, 2)
       const response = await fetch(url, options);   
       const data = await response.json();
       setInscricoes(data)
@@ -85,29 +85,29 @@ function CamFace() {
         const resizedDetections = faceapi.resizeResults(detections, displaySize);
         
         const labels = await GetDados();
-        //console.log(labels)
+       // console.log(labels)
         
         const faceMatcher = new faceapi.FaceMatcher(labels, 0.6);
         results = resizedDetections.map(d =>
             faceMatcher.findBestMatch(d.descriptor)
         )
         
-        //console.log(results)
+        console.log(results)
         if(results){
           const token = window.localStorage.getItem("token");
             results.map( async presentes => {
               const idUser = presentes.label.split(" ")
               console.log(idUser[1])
-              const {url, options} = LISTA_PRESENCA(token,idUser[1]);
-              const response = await fetch(url, options);  
-              const data = await response.json();
-              console.log(data)
+              if(idUser[1] !== undefined){
+                const {url, options} = LISTA_PRESENCA(token,idUser[1]);
+                const response = await fetch(url, options);  
+                const data = await response.json();              
+              }
+              
             })
         }
         
-        async function SetPresenca(){
-          
-        }
+        
 
           await canvasRef.current.getContext('2d').clearRect(0, 0, videoRef.Width, videoRef.Height);
            faceapi.draw.drawDetections(canvasRef.current, resizedDetections);

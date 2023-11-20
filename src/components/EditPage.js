@@ -18,16 +18,6 @@ const EditPage = () => {
     const [error, seterror] = React.useState(null);
     const [img, setImg] = React.useState({});
 
-
-
-    function formDataToJson(formData) {
-      const json = {};
-      formData.forEach((value, key) => {
-        json[key] = value;
-      });
-      return json;
-    }
-
     React.useEffect(() => {
         geteventos();
        }, [params.id]);
@@ -37,6 +27,8 @@ const EditPage = () => {
             const {url, options} = GET_EVENTO(params.id);
             const response = await fetch(url, options);  
             const data = await response.json();
+            console.log(data);
+
             seteventname(data.nome);
             setDescricao(data.descricao);
             setQtd(data.quantidade);
@@ -48,8 +40,6 @@ const EditPage = () => {
         }
         
     }
-
-       console.log(evento)
 
        function handleImgChange({ target }) {
         setImg({
@@ -68,19 +58,18 @@ const EditPage = () => {
         formData.append('data', data);
         formData.append('horario', horario);
         formData.append('imagem', img.raw);
-    
-        console.log(formDataToJson(formData))
         
         const token = window.localStorage.getItem("token");
         const id = params.id;
           if(token){        
             try{
-              const {url, options} = UPDATE_EVENTOS(formData, token, params.id)
+              const {url, options} = UPDATE_EVENTOS(formData, token, id)
               const response = await fetch(url, options);   
               const json = await response.json();
               seterror(json.message);
+              console.log(json)
             }catch(e){          
-              console.log(e);
+              console.log();
             }  
           }
       }
@@ -117,7 +106,7 @@ if(true){
                 id="img"
                 onChange={handleImgChange}
               />
-
+              {img.preview && <img src={img.preview} alt="Preview" className= {style.img} />}
             </div>
                         
             {error && <p>{error}</p>}

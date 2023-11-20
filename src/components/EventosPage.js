@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import style from '../components/EventosPage.module.css'
-import {DELETE_EVENTOS, GET_EVENTO, USER_INSCREVER, eventos, imgApiUrl} from '../Api'
-import Button from './Forms/Button'
-import { Link, useParams } from 'react-router-dom'
+import {DELETE_EVENTOS, GET_EVENTO, USER_INSCREVER, imgApiUrl} from '../Api'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { UserContext } from '../UserContext'
-import Analisar from './IA/Analisar'
 
 
 const Eventos = () => {
   const params = useParams();
   const [evento, setEvento] = useState();
-
+  const [inscrito, setInscrito] = useState(false)
+  const navigate = useNavigate();
   const token = window.localStorage.getItem("token");
   const {testToken, data} = React.useContext(UserContext);
 
@@ -48,30 +47,44 @@ const Eventos = () => {
       const {url, options} = DELETE_EVENTOS(params.id, token);
       const response = await fetch(url, options);  
       const data = await response.json();
+      navigate('/conta');  
     }catch(erro){
       console.log(erro);
     }
   }
   if(evento){
     return (
-      <div className={`${style.layout} container`}>
+      <div className={style.layout}>
           <img className={style.imgEventos} src={imgApiUrl + evento.imagem}/>
+          <h1 className={style.titulo}>{evento.nome}</h1>
           <div className={style.info}>
-            <h1>{evento.nome}</h1>
             <p>{evento.descricao}</p>
             <h3>{evento.local}</h3>
             <h4>{evento.data}</h4>
             <h4>{evento.horario}</h4>
 
-            {token ? <Button onClick={Inscrever} >Inscrever-se</Button> : ''}
-            {evento?.user_id === data?.id ? <Button onClick={deleteEvento}>Deletar evento</Button> : ''}
-            <Link to = {`formulario/`} className={style.btn}>Formulário</Link>
-            <Link to = {`editar/`} className={style.btn}>Editar</Link>
+            {testToken ? 
+              inscrito ? <div>
+                <button className={style.btnDesinscrever} onClick={Inscrever} >Desinscrever-se</button> 
+                <Link to = {`formulario/${params.id}`} className={style.btnForm}>Formulário</Link>
+                </div> : 
+                  <button className={style.btnInscrever} onClick={Inscrever} >Inscrever-se</button> 
             
-            {/* {data && evento && evento.user_id === data.id ? <Link to= '/facial' className={style.btn}>Reconhecimento facial</Link> : ''} */}
-            <Link to= '/facial' className={style.btn}>Reconhecimento facial</Link> 
+            : <h3 className={style.aviso}>Realize o login para se inscrever</h3>}
 
-          </div>        
+          </div> 
+          <div>
+          {evento?.user_id === data?.id ? <div > 
+              <h2 className={style.opcoestitulo}>Opções do Administrador</h2>   
+              <div className={style.opcoes}> 
+              <Link to = {`analisar/${params.id}`} className={style.btn}>Analisar dados(IA)</Link>
+              <Link to={`/facial/`} className={style.btn}>Reconhecimento facial</Link>
+              <Link to = {`editar/`} className={style.btnEdit}>Editar</Link>
+              <button className={style.btnDel} onClick={deleteEvento}>Deletar evento</button>
+              </div>                     
+              
+            </div> : ''}             
+          </div>       
       </div>
       
     )
