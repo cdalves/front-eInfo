@@ -4,6 +4,7 @@ import style from "./CamFace.module.css"
 import { useParams } from 'react-router-dom';
 import { EVENTO_INSCRICOES, LISTA_PRESENCA } from '../../Api';
 import Button from '../Forms/Button';
+import { DrawBox } from 'face-api.js/build/commonjs/draw';
 
 function CamFace() {
   const videoRef = useRef();
@@ -91,13 +92,11 @@ function CamFace() {
         results = resizedDetections.map(d =>
             faceMatcher.findBestMatch(d.descriptor)
         )
-        
-        console.log(results)
+
         if(results){
           const token = window.localStorage.getItem("token");
             results.map( async presentes => {
               const idUser = presentes.label.split(" ")
-              console.log(idUser[1])
               if(idUser[1] !== undefined){
                 const {url, options} = LISTA_PRESENCA(token,idUser[1]);
                 const response = await fetch(url, options);  
@@ -110,9 +109,18 @@ function CamFace() {
         
 
           await canvasRef.current.getContext('2d').clearRect(0, 0, videoRef.Width, videoRef.Height);
-           faceapi.draw.drawDetections(canvasRef.current, resizedDetections);
-           faceapi.draw.drawFaceLandmarks(canvasRef.current, resizedDetections);
-
+          faceapi.draw.drawDetections(canvasRef.current, resizedDetections);
+          faceapi.draw.drawFaceLandmarks(canvasRef.current, resizedDetections);
+          console.log(canvasRef)
+          results.forEach((result, index) => {
+            console.log(result)
+              const box = resizedDetections[index].detection.box
+              new faceapi.draw.DrawTextField(result.label, box.bottomRight)
+              .draw(canvasRef.current)       
+            
+          });
+           
+          
         //   results.forEach((result, index) => {
         //     const box = resizedDetections[index].detection.box
         //     const { label, distance } = result
