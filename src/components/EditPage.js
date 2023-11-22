@@ -74,8 +74,6 @@ const EditPage = () => {
           }
       }
 
-      
-  
 if(true){
     return (
     <div className={style.pagEvent}>

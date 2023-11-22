@@ -147,6 +147,19 @@ export function Get_User(token) {
     };
   }
 
+  export function VERIFICAR_INSCRICAO(token, id) {
+    return {
+      url: apiURL + '/verificarinscricao/' + id,
+      options: {
+        method: 'GET',
+        headers: {
+          'Accept': 'Application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      },
+    };
+  }
+
   export function LISTA_PRESENCA(token, id) {
     return {
       url: apiURL + '/registrar-presenca/' + id,

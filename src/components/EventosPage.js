@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import style from '../components/EventosPage.module.css'
-import {DELETE_EVENTOS, GET_EVENTO, USER_INSCREVER, imgApiUrl} from '../Api'
+import {DELETE_EVENTOS, GET_EVENTO, USER_INSCREVER, VERIFICAR_INSCRICAO, imgApiUrl} from '../Api'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { UserContext } from '../UserContext'
 
@@ -14,10 +14,11 @@ const Eventos = () => {
   const {testToken, data} = React.useContext(UserContext);
 
   useEffect(() => {
-    Inscrições();     
+    getEventos();   
+    verificarIncricao();
    }, []);
 
-  async function Inscrições(){
+  async function getEventos(){
     try{
       const {url, options} = GET_EVENTO(params.id);
       const response = await fetch(url, options);  
@@ -28,6 +29,17 @@ const Eventos = () => {
     }
   }
 
+  async function verificarIncricao(){
+    try{
+      const {url, options} = VERIFICAR_INSCRICAO(token ,params.id);
+      const response = await fetch(url, options);  
+      const data = await response.json();
+      setInscrito(data.inscrito)
+      console.log(inscrito)
+    }catch(erro){
+      console.log(erro);
+    }
+  }
 
   async function Inscrever(){    
     const formData = new FormData();
@@ -37,6 +49,8 @@ const Eventos = () => {
       const {url, options} = USER_INSCREVER(formData, token);
       const response = await fetch(url, options)
       const res = await response.json();
+      verificarIncricao();
+
     }catch(e){
       console.log(e);
     }}
