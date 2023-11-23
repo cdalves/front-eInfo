@@ -31,10 +31,14 @@ function App() {
                 <Route path='/conta/evento/:id' element={<EventosPage/>}/>
                 <Route path='/criar-evento' element={<CreatEventos/>}/>
                 <Route path='/evento/:id/formulario' element={<Formulario/>}/>
-                <Route path='/conta/evento/:id/formulario' element={<Formulario/>}/>
-                <Route path='/conta/evento/:id/analisar' element={<RespostaIA/>}/>
-                <Route path='/facial' element={<CamFace/>}/>
-                <Route path='/conta/evento/:id/editar' element={<EditPage/>}/>
+                <Route path='/evento/:id/formulario/' element={<Formulario/>}/>
+                <Route path='/evento/:id/analisar/' element={<RespostaIA/>}/>
+                <Route path='/evento/:id/facial/' element={<CamFace/>}/>
+                <Route path='/evento/:id/editar/' element={<EditPage/>}/>
+                <Route path='/conta/evento/:id/formulario/' element={<Formulario/>}/>
+                <Route path='/conta/evento/:id/analisar/' element={<RespostaIA/>}/>
+                <Route path='/conta/evento/:id/facial/' element={<CamFace/>}/>
+                <Route path='/conta/evento/:id/editar/' element={<EditPage/>}/>
                 <Route path='/addFace' element={<AddFAce/>}/>
 
             </Routes>

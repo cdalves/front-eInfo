@@ -80,7 +80,7 @@ const Eventos = () => {
             {testToken ? 
               inscrito ? <div>
                 <button className={style.btnDesinscrever} onClick={Inscrever} >Desinscrever-se</button> 
-                <Link to = {`formulario/${params.id}`} className={style.btnForm}>Formulário</Link>
+                <Link to = {`formulario/`} className={style.btnForm}>Formulário</Link>
                 </div> : 
                   <button className={style.btnInscrever} onClick={Inscrever} >Inscrever-se</button> 
             
@@ -91,8 +91,8 @@ const Eventos = () => {
           {evento?.user_id === data?.id ? <div > 
               <h2 className={style.opcoestitulo}>Opções do Administrador</h2>   
               <div className={style.opcoes}> 
-              <Link to = {`analisar/${params.id}`} className={style.btn}>Analisar dados(IA)</Link>
-              <Link to={`/facial/`} className={style.btn}>Reconhecimento facial</Link>
+              <Link to = {`analisar/`} className={style.btn}>Analisar dados(IA)</Link>
+              <Link to={`facial/`} className={style.btn}>Reconhecimento facial</Link>
               <Link to = {`editar/`} className={style.btnEdit}>Editar</Link>
               <button className={style.btnDel} onClick={deleteEvento}>Deletar evento</button>
               </div>                     

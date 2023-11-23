@@ -46,6 +46,7 @@ const Home = () => {
     }
   }
 
+  console.log(eventos2)
   if(eventos && eventos2){
     return(
       <div className={style.layoutHome}>
@@ -67,9 +68,13 @@ const Home = () => {
                 </div> : 
                 <div className={style.ultimosev}>
                     <h3>Adicionados recentemente</h3>
-                    {eventos2?.map(evento => (
-                  <Eventos key={evento.id} id={evento.id} nome={evento.nome} imagem={evento.imagem}/>
-                ))}
+
+                    {eventos2.map(evento => (
+                      <div>
+                        {evento ? <Eventos key={evento.id} id={evento.id} nome={evento.nome} imagem={evento.imagem}/> : ""
+                        }
+                      </div>
+                )) }
                 </div> 
               }
               

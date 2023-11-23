@@ -18,7 +18,7 @@ function CamFace() {
   async function InscritosEvento(){
     const token = window.localStorage.getItem("token");
     try{
-      const {url, options} = EVENTO_INSCRICOES(token, 2)
+      const {url, options} = EVENTO_INSCRICOES(token, params.id)
       const response = await fetch(url, options);   
       const data = await response.json();
       setInscricoes(data)
@@ -39,6 +39,7 @@ function CamFace() {
         new faceapi.LabeledFaceDescriptors(identificador, descritor))
     }
 
+    
     return labeledDescriptors; 
     
   }
@@ -86,7 +87,7 @@ function CamFace() {
         const resizedDetections = faceapi.resizeResults(detections, displaySize);
         
         const labels = await GetDados();
-       // console.log(labels)
+       //console.log(labels)
         
         const faceMatcher = new faceapi.FaceMatcher(labels, 0.6);
         results = resizedDetections.map(d =>
@@ -111,9 +112,7 @@ function CamFace() {
           await canvasRef.current.getContext('2d').clearRect(0, 0, videoRef.Width, videoRef.Height);
           faceapi.draw.drawDetections(canvasRef.current, resizedDetections);
           faceapi.draw.drawFaceLandmarks(canvasRef.current, resizedDetections);
-          console.log(canvasRef)
           results.forEach((result, index) => {
-            console.log(result)
               const box = resizedDetections[index].detection.box
               new faceapi.draw.DrawTextField(result.label, box.bottomRight)
               .draw(canvasRef.current)       
@@ -121,13 +120,7 @@ function CamFace() {
           });
            
           
-        //   results.forEach((result, index) => {
-        //     const box = resizedDetections[index].detection.box
-        //     const { label, distance } = result
-        //     new faceapi.draw.DrawTextField([
-        //         `${label} (${parseInt(distance * 100, 10)})`
-        //     ], box.bottomRight).draw(canvasRef)
-        // })
+      
         
       }
     }, 10000)
