@@ -78,9 +78,8 @@ const Eventos = () => {
 
   async function Desinscrever(){
     try{
-      const {url, options} = USER_DESINSCREVER(params.id, token);
-      const response = await fetch(url, options);  
-      const data = await response.json();
+      const {url, options} = USER_DESINSCREVER(inscrito.id, token);
+      const response = await fetch(url, options); 
       verificarIncricao()
     }catch(erro){
       console.log(erro);
@@ -113,12 +112,13 @@ const Eventos = () => {
             {testToken ? 
               inscrito ? <div>
                 <button className={style.btnDesinscrever} onClick={Desinscrever} >Desinscrever-se</button> 
+                <button className={style.certificado} onClick={Certificado}>certificado</button>
                 <Link to = {`formulario/`} className={style.btnForm}>Formulário</Link>
                 </div> : 
+                <div>
                   <button className={style.btnInscrever} onClick={Inscrever} >Inscrever-se</button> 
-            
+                </div>                  
             : <h3 className={style.aviso}>Realize o login para se inscrever</h3>}
-              <button className={style.certificado} onClick={Certificado}>certificado</button>
           </div> 
           <div>
           {evento?.user_id === data?.id ? <div > 
