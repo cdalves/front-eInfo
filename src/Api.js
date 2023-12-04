@@ -48,7 +48,7 @@ export function UPDATE_EVENTOS(formData, token, id) {
         'Content-Type': 'Application/json',   
         Authorization: 'Bearer ' + token,
       },
-      body: formData,
+      body: JSON.stringify(formData),
     },
   };
 }
@@ -147,6 +147,19 @@ export function Get_User(token) {
     };
   }
 
+  export function USER_DESINSCREVER(id,token) {
+    return {
+      url: apiURL + '/inscricao/'+id,
+      options: {
+        method: 'DELETE',
+        headers: {
+          'Accept': 'Application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      },
+    };
+  }
+
   export function VERIFICAR_INSCRICAO(token, id) {
     return {
       url: apiURL + '/verificarinscricao/' + id,
@@ -208,6 +221,19 @@ export function Get_User(token) {
           Authorization: 'Bearer ' + token,
         },
         body: data,
+      },
+    };
+  }
+
+  export function GET_CERTIFICADO(token,id) {
+    return {
+      url: apiURL + '/certificado/' + id,
+      options: {
+        method: 'GET',
+        headers: {
+          'Accept': 'Application/json',  
+          Authorization: 'Bearer ' + token,
+        },
       },
     };
   }

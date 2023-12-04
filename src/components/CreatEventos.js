@@ -39,7 +39,8 @@ const CreatEventos = () => {
           const {url, options} = CREAT_EVENTOS(formData, token)
           const response = await fetch(url, options);   
           const json = await response.json();
-          seterror(json.message);
+          seterror(json.status)
+          console.log(json)
         }catch(e){          
           console.log(e);
 

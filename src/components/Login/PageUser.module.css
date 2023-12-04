@@ -49,6 +49,9 @@
     left: 120px;
 }
 
+.opcoes{
+    margin-top: 50px;
+}
 
 .opcoes li{
     display: flex;

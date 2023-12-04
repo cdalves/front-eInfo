@@ -99,12 +99,6 @@ const PageUser = () => {
             <div className={style.opcoes}>
               <ul>
                 <li>
-                  <Link className={style.btn}>Editar perfil</Link>
-                </li>
-                <li>
-                  <Link className={style.btn} to='/addFace'>Cadastrar rosto</Link>
-                </li>
-                <li>
                   <Link className={(showInscricoes ? style.btnactive : style.btn)} onClick={getInscricoes} >Inscrições</Link>
                 </li>
                 <li>

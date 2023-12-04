@@ -6,6 +6,7 @@ import useForm from '../../Hooks/useForm';
 import IconLogin  from '../../Assets/iconLogin.png';
 import { Create_User } from '../../Api';
 import * as faceapi from 'face-api.js'
+import { useNavigate } from 'react-router-dom';
 
 
 const Sign = () => {
@@ -17,6 +18,8 @@ const Sign = () => {
   const [descritor, setDescritor] = React.useState([]);
   const [load, setLoad] = React.useState(null);
   const [senha, setSenha] = React.useState(false);
+  const navigate = useNavigate();
+
   
   async function handleSubmit(event){
     event.preventDefault();
@@ -32,7 +35,9 @@ const Sign = () => {
           const { url, options } = Create_User(formData);      
           const response = await fetch( url, options);
           const data = await response.json();   
-          console.log( JSON.parse(data))   
+          console.log(data)   
+          alert(data.status)
+          navigate('/entrar');
         }catch(e) { 
           console.log(e)   
 

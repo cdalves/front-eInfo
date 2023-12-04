@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import style from '../components/EventosPage.module.css'
-import {DELETE_EVENTOS, GET_EVENTO, USER_INSCREVER, VERIFICAR_INSCRICAO, imgApiUrl} from '../Api'
+import {DELETE_EVENTOS, GET_CERTIFICADO, GET_EVENTO, USER_DESINSCREVER, USER_INSCREVER, VERIFICAR_INSCRICAO, imgApiUrl} from '../Api'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import { UserContext } from '../UserContext'
 
@@ -12,6 +12,8 @@ const Eventos = () => {
   const navigate = useNavigate();
   const token = window.localStorage.getItem("token");
   const {testToken, data} = React.useContext(UserContext);
+  const [idInsc, setIdInsc] = useState()
+  
 
   useEffect(() => {
     getEventos();   
@@ -34,8 +36,7 @@ const Eventos = () => {
       const {url, options} = VERIFICAR_INSCRICAO(token ,params.id);
       const response = await fetch(url, options);  
       const data = await response.json();
-      setInscrito(data.inscrito)
-      console.log(inscrito)
+      setInscrito(data.inscrito);
     }catch(erro){
       console.log(erro);
     }
@@ -56,6 +57,37 @@ const Eventos = () => {
     }}
   }
 
+  async function Certificado(){
+    try{
+      const {url, options} = GET_CERTIFICADO(token, params.id);
+      const response = await fetch(url, options);
+      const data = await response.blob();
+      const pdfUrl = URL.createObjectURL(data);
+      const a = document.createElement('a');
+      a.href = pdfUrl;
+      a.download = `${evento.nome}.pdf`;
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(pdfUrl);
+    }catch(e){
+      console.log(e);
+    }
+  }
+
+  async function Desinscrever(){
+    try{
+      const {url, options} = USER_DESINSCREVER(params.id, token);
+      const response = await fetch(url, options);  
+      const data = await response.json();
+      verificarIncricao()
+    }catch(erro){
+      console.log(erro);
+    }
+  }
+  
+
   async function deleteEvento(){
     try{
       const {url, options} = DELETE_EVENTOS(params.id, token);
@@ -66,6 +98,7 @@ const Eventos = () => {
       console.log(erro);
     }
   }
+
   if(evento){
     return (
       <div className={style.layout}>
@@ -79,13 +112,13 @@ const Eventos = () => {
 
             {testToken ? 
               inscrito ? <div>
-                <button className={style.btnDesinscrever} onClick={Inscrever} >Desinscrever-se</button> 
+                <button className={style.btnDesinscrever} onClick={Desinscrever} >Desinscrever-se</button> 
                 <Link to = {`formulario/`} className={style.btnForm}>Formulário</Link>
                 </div> : 
                   <button className={style.btnInscrever} onClick={Inscrever} >Inscrever-se</button> 
             
             : <h3 className={style.aviso}>Realize o login para se inscrever</h3>}
-
+              <button className={style.certificado} onClick={Certificado}>certificado</button>
           </div> 
           <div>
           {evento?.user_id === data?.id ? <div > 

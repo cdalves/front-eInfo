@@ -27,8 +27,6 @@ const EditPage = () => {
             const {url, options} = GET_EVENTO(params.id);
             const response = await fetch(url, options);  
             const data = await response.json();
-            console.log(data);
-
             seteventname(data.nome);
             setDescricao(data.descricao);
             setQtd(data.quantidade);
@@ -49,22 +47,22 @@ const EditPage = () => {
       }
 
       async function handleSubmit(event){
-        event.preventDefault();
-        const formData = new FormData();
-        formData.append('nome', eventname);
-        formData.append('descricao', descricao);
-        formData.append('quantidade', qtd);
-        formData.append('local', local);
-        formData.append('data', data);
-        formData.append('horario', horario);
-        formData.append('imagem', img.raw);
+        event.preventDefault();  
         
         const token = window.localStorage.getItem("token");
-        const id = params.id;
           if(token){        
             try{
-              const {url, options} = UPDATE_EVENTOS(formData, token, id)
-              const response = await fetch(url, options);   
+              const {url, options} = UPDATE_EVENTOS({
+              nome: eventname,
+              descricao: descricao,
+              quantidade: qtd,
+              local: local,
+              data: data,
+              horario: horario,           
+              }, token, params.id)
+
+              const response = await fetch(url, options); 
+              console.log(response)
               const json = await response.json();
               seterror(json.message);
               console.log(json)
@@ -74,7 +72,7 @@ const EditPage = () => {
           }
       }
 
-if(true){
+if(eventname){
     return (
     <div className={style.pagEvent}>
       <section>

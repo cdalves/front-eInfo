@@ -121,7 +121,19 @@
     text-align: center;
 }
 
-.btn:hover,.btnDel:hover,.btnEdit:hover, .btnInscrever:hover, .btnForm:hover{
+.certificado{
+    width: 200px;
+    font-size: 1.5rem;
+    font-style: bold;
+    padding: 10px;
+    border-radius: 5px;
+    color: aliceblue;
+    background-color:#3a4561;
+    text-align: center;
+    margin: 10px;
+    }
+
+.btn:hover,.btnDel:hover,.btnEdit:hover, .btnInscrever:hover, .btnForm:hover, .certificado:hover{
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
 }
