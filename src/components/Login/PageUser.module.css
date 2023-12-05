@@ -1,6 +1,6 @@
 .layout{
     width: 80%;
-    margin: 10% auto;
+    margin: 0 auto;
     margin-top: 8rem;
    
 }
@@ -10,22 +10,32 @@
     grid-template-areas: "userArea userArea userEventos userEventos userEventos ";
 }
 
+
 .userArea{
-    max-width: 400px;
-    min-width: 300px;
+    width: 400px;
     height: 500px;
     background-color: rgba(117, 116, 116, 0.356);
     border-radius: 10px;
     grid-area: "userArea";
     grid-column: userArea;
     grid-row: userArea;
+    position: sticky;
+    top: 8rem;
+    overflow: hidden;
+}
+
+.name{
+    width: 200px;
+    
 }
 
 .userEventos{
+    width: 900px;
     grid-area: "userEventos";
     grid-column: userEventos;
     grid-row: userEventos;
     padding: 1rem;
+
 }
 
 
@@ -37,28 +47,79 @@
     position: relative;
     top: -80px;
     left: 120px;
+}
 
+.opcoes{
+    margin-top: 50px;
 }
 
 .opcoes li{
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
+.btn{
+    width: 50%;
+    font-size: 1.5rem;
+    font-style: bold;
+    padding: 10px;
+    border-radius: 5px;
+    color: aliceblue;
+    background-color:#3a4561;
+    text-align: center;
+
+}
+
+.btn:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
+.btnactive{
+    width: 50%;
+    font-size: 1.5rem;
+    font-style: bold;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    text-align: center;
+
+}
+
+
+
 .btncriar{
+    width: 50%;
     font-size: 1.5rem;
     font-style: bold;
     padding: 10px;
     border-radius: 5px;
     color: aliceblue;
     background-color: rgb(17, 164, 66);
-    position: relative;
-    bottom: -200px;
-    left: auto;
+    text-align: center;
 
 }
 
 .btncriar:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
+.btnExit{
+    width: 50%;
+    font-size: 1.5rem;
+    font-style: bold;
+    padding: 10px;
+    border-radius: 5px;
+    color: aliceblue;
+    background-color:#7d1717;
+    text-align: center;
+
+}
+
+.btnExit:hover{
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
 }

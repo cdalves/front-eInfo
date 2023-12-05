@@ -1,55 +1,52 @@
-.layoutHome{
-  width: 1520px;
+.layoutHome {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 8rem;
   display: grid;
-  grid-template-areas: 
-  "principal principal principal secundario"
-  "principal principal principal secundario"
-  "principal principal principal secundario"
-  "principal principal principal secundario";
-
-  grid-gap: 20px;
+  grid-template-areas: "principal principal secundario";
 }
 
-
-.principal{
-  width: 1100px;
-  grid-area: "principal";
-  grid-row: principal;
-  grid-column: principal;
-
-    
+.principal {
+  min-width: 800px;
+  grid-area: principal;
+  margin: 0 40px;
 }
 
-.secundario{
-  width: 380px;
-  grid-area: "secundario";
-  margin: -1px;
-}
-
-
-
-
-@media (max-width: 1550px) {
-  .layoutHome{
-  width: 90%;
-  display: block;
-  grid-template-areas:none;
-  justify-content: center;
+.secundario {
+  background-image: url(/src/Assets/fundo-busca.jpg);
+  /* background-color: #000000a7; */
+  background-position: top left;
+  border-radius: 10px;
+  width: 400px;
+  height: 85vh;
+  grid-area: secundario;
+  position: sticky;
+  top: 8rem;
+  overflow: auto;
+  padding: 20px;
   
 }
 
+.pesquisa{
+  justify-content: space-between;
+}
 
-.principal{
+.busca{
   width: 100%;
-  grid-area: none;
+  height: 3rem;
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 10px;
+
+}
+.resultado{
+  width: 90%;
+  margin: 0 auto;
   margin-top: 20px;
 }
 
-.secundario{
-  width: 100%; 
-  grid-area: none;
-  margin-top: 20px;
+.ultimosev{
+  margin-top: 10px;
+}
 
-}
-}
 

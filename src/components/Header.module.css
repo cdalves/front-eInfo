@@ -5,13 +5,14 @@
     position: fixed;
     top: 0px;
     box-shadow:  0 2px 0 rgb(97, 95, 95);
+    z-index: 1;
 }
 
 .nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 150px;
+    width: 200px;
     position:absolute;
     right: 20px;
     bottom: 20px;
@@ -28,6 +29,7 @@
 .links{
     color: aliceblue;
     font-size: 1.5rem;
+    width: 100px;
 }
 
 .links:hover{

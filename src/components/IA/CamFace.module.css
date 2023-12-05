@@ -1,0 +1,28 @@
+.container {
+    width: 1080px;
+    margin: 0 auto;
+    margin-top: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; 
+}
+
+.video {
+    width: 1080px; 
+    height: 720px;
+
+}
+
+.canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1080px;
+    height: 720px;
+}
+
+.btn{
+    display: flex;
+    justify-content: center;
+}

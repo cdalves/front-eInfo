@@ -1,8 +1,12 @@
 .layout{
+    width: 70%;
     background-color: rgba(117, 116, 116, 0.356);
     border-radius: 5px;
     padding: 10px;
+    margin: 0 auto;
+    margin-top: 8rem;
     margin-bottom: 20px;
+
 }
 
 .imgEventos{
@@ -11,7 +15,12 @@
 
 }
 
+.titulo{
+    margin: 20px;
+}
+
 .info{
+    text-indent: 20px;
     display: grid;
     color: rgb(0, 0, 0); 
     margin: 1rem ;
@@ -22,4 +31,109 @@
 
 .h3{
     list-style: disc;
+}
+
+
+.opcoestitulo{
+    color: rgb(7, 7, 7);
+    padding: 10px;
+    border-bottom: 5px solid black;
+}
+
+.opcoes{
+    margin: 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.aviso{ 
+    color: #ff0000;
+}
+
+.btn{
+    width: 100%;
+    font-size: 1.5rem;
+    font-style: bold;
+    padding: 10px;
+    border-radius: 5px;
+    color: aliceblue;
+    background-color:#3a4561;
+    text-align: center;
+}
+
+.btnEdit{
+    width: 100%;
+    font-size: 1.5rem;
+    font-style: bold;
+    padding: 10px;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+    background-color: yellow;
+    text-align: center;
+
+}
+
+
+.btnDel{
+    width: 100%;
+    font-size: 1.5rem;
+    font-style: bold;
+    padding: 10px;
+    border-radius: 5px;
+    color: aliceblue;
+    background-color:#7d1717;
+    text-align: center;
+}
+
+.btnInscrever{
+    width: 200px;
+    font-size: 1.5rem;
+    font-style: bold;
+    padding: 10px;
+    border-radius: 5px;
+    color: aliceblue;
+    background-color: rgb(17, 164, 66);
+    text-align: center;
+}
+
+.btnDesinscrever{
+    width: 200px;
+    font-size: 1.5rem;
+    font-style: bold;
+    padding: 10px;
+    border-radius: 5px;
+    color: aliceblue;
+    background-color:#7d1717;
+    text-align: center;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.btnForm{
+    width: 200px;
+    font-size: 1.5rem;
+    font-style: bold;
+    padding: 10px;
+    border-radius: 5px;
+    color: aliceblue;
+    background-color:#3a4561;
+    text-align: center;
+}
+
+.certificado{
+    width: 200px;
+    font-size: 1.5rem;
+    font-style: bold;
+    padding: 10px;
+    border-radius: 5px;
+    color: aliceblue;
+    background-color:#3a4561;
+    text-align: center;
+    margin: 10px;
+    }
+
+.btn:hover,.btnDel:hover,.btnEdit:hover, .btnInscrever:hover, .btnForm:hover, .certificado:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }

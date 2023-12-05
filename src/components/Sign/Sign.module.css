@@ -1,0 +1,37 @@
+.areaLogin{
+    width: 600px;
+    margin: 8rem auto;
+    background-color: rgba(117, 116, 116, 0.356);
+    padding: 1rem;
+    border-radius: 20px;
+    margin-bottom: 500px;
+}
+
+.sign{
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    padding: 100px 0;    
+}
+
+
+
+.icon{
+    width: 20%;
+}
+
+.info{
+    margin: 20px;
+}
+
+.upload{
+    margin-bottom: 20px;
+    font-size: 1rem;
+
+}
+
+.error{
+    color: red;
+    font-weight: bold;
+
+}
