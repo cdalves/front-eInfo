@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { GET_EVENTO, UPDATE_EVENTOS, imgApiUrl } from '../Api';
+import { GET_EVENTO, UPDATE_EVENTOS, UPDATE_IMG_EVENTOS, imgApiUrl } from '../Api';
 import { useParams } from 'react-router-dom';
 import style from './EditPage.module.css'
 import useForm from '../Hooks/useForm';
@@ -47,11 +47,14 @@ const EditPage = () => {
       }
 
       async function handleSubmit(event){
-        event.preventDefault();  
-        
+        event.preventDefault(); 
         const token = window.localStorage.getItem("token");
           if(token){        
             try{
+              
+              if(img.raw){
+                Update_IMG(token)
+              }
               const {url, options} = UPDATE_EVENTOS({
               nome: eventname,
               descricao: descricao,
@@ -60,16 +63,27 @@ const EditPage = () => {
               data: data,
               horario: horario,           
               }, token, params.id)
-
               const response = await fetch(url, options); 
-              console.log(response)
               const json = await response.json();
-              seterror(json.message);
-              console.log(json)
+              alert(json.status);
             }catch(e){          
               console.log();
             }  
           }
+      }
+
+      async function Update_IMG(token){
+        let formData = new FormData();
+        formData.append('imagem', img.raw);
+        formData.append('_method', 'PUT');       
+        try{
+          const {url, options} = UPDATE_IMG_EVENTOS(formData,token, params.id)
+          const response = await fetch(url, options); 
+          console.log(response)
+          const IMG = await response.json();
+        }catch(e){
+          console.log(e)
+        }
       }
 
 if(eventname){

@@ -39,7 +39,7 @@ export function BUSCA_EVENTO(name) {
   };
 }
 
-export function UPDATE_EVENTOS(formData, token, id) {
+export function UPDATE_EVENTOS(body, token, id) {
   return {
     url: apiURL + '/evento/' + id,
     options: {
@@ -48,9 +48,24 @@ export function UPDATE_EVENTOS(formData, token, id) {
         'Content-Type': 'Application/json',   
         Authorization: 'Bearer ' + token,
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(body),
     },
   };
+}
+
+export function UPDATE_IMG_EVENTOS(formData, token, id) {
+  return {
+    url: apiURL + '/evento/' + id,
+    options: {
+      method: 'POST',
+      headers: { 
+        Authorization: 'Bearer ' + token,
+      },
+      body: formData,
+    },
+   
+  };
+  
 }
 
 export function DELETE_EVENTOS(id, token) {

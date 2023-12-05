@@ -18,7 +18,6 @@ const CreatEventos = () => {
   const [img, setImg] = React.useState({});
 
 
-
   const {testToken } = React.useContext(UserContext);
   
   async function handleSubmit(event){
@@ -31,7 +30,7 @@ const CreatEventos = () => {
     formData.append('local', local.value);
     formData.append('data', data.value);
     formData.append('horario', horario.value);
-    formData.append('imagem', img.raw);
+    formData.append('imagem', img.raw);       
     
     const token = window.localStorage.getItem("token");
       if(eventname.validate() && token){        
