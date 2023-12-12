@@ -79,6 +79,7 @@ const PageUser = () => {
       const data = await response.json();
       window.localStorage.removeItem('token');  
       navigate('/entrar');  
+      window.location.reload();
     }catch(erro){
       console.log(erro);
     }
