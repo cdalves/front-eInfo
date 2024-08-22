@@ -12,12 +12,15 @@ const Eventos = () => {
   const navigate = useNavigate();
   const token = window.localStorage.getItem("token");
   const {testToken, data} = React.useContext(UserContext);
-  const [idInsc, setIdInsc] = useState()
+  const [presenca, setpresenca] = useState(false)
+  const [file, setFile] = useState([]);
+
   
 
   useEffect(() => {
     getEventos();   
     verificarIncricao();
+    Verificar_Certificado()
    }, []);
 
   async function getEventos(){
@@ -57,12 +60,20 @@ const Eventos = () => {
     }}
   }
 
-  async function Certificado(){
-    try{
+  async function Verificar_Certificado(){
+    try{ 
       const {url, options} = GET_CERTIFICADO(token, params.id);
       const response = await fetch(url, options);
       const data = await response.blob();
-      const pdfUrl = URL.createObjectURL(data);
+      setpresenca(response.ok)
+      setFile(data);
+    }catch(e){
+      console.log(e);
+    }
+  }
+
+  async function Baixar_Certificado(){         
+      const pdfUrl = URL.createObjectURL(file);
       const a = document.createElement('a');
       a.href = pdfUrl;
       a.download = `${evento.nome}.pdf`;
@@ -71,9 +82,7 @@ const Eventos = () => {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(pdfUrl);
-    }catch(e){
-      console.log(e);
-    }
+   
   }
 
   async function Desinscrever(){
@@ -112,14 +121,19 @@ const Eventos = () => {
             {testToken ? 
               inscrito ? <div>
                 <button className={style.btnDesinscrever} onClick={Desinscrever} >Desinscrever-se</button> 
-                <button className={style.certificado} onClick={Certificado}>certificado</button>
-                <Link to = {`formulario/`} className={style.btnForm}>Formulário</Link>
+                {presenca ? <div>
+                  <button className={style.certificado} onClick={Baixar_Certificado}>certificado</button>
+                  <Link to = {`formulario/`} className={style.btnForm}>Formulário</Link>
+                </div> : ''}
                 </div> : 
                 <div>
                   <button className={style.btnInscrever} onClick={Inscrever} >Inscrever-se</button> 
                 </div>                  
             : <h3 className={style.aviso}>Realize o login para se inscrever</h3>}
           </div> 
+          
+            
+          
           <div>
           {evento?.user_id === data?.id ? <div > 
               <h2 className={style.opcoestitulo}>Opções do Administrador</h2>   
